@@ -17,28 +17,31 @@ public class LoginController {
 	
 	@FXML public TextField tfUsername;
 	
-	public final String adminUserName = "admin";
+	public final String admin = "admin";
 
 	public void login(ActionEvent event) throws IOException {
 		
 		//Make lowercase idk????. Also check edge cases
-		String username = tfUsername.getText();
-		Parent sceneManager;
-		System.out.print(username);
-		if(username.equals(adminUserName)) {
+		//Parent sceneManager;
+		
+
+		if(tfUsername.getText().equals(admin)) {
 			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/Admin.fxml"));
-			sceneManager = (Parent) fxmlLoader.load();
-			AdminController adminController = fxmlLoader.getController();
+			Parent sceneManager = (Parent) fxmlLoader.load();
+//			AdminController adminController = fxmlLoader.getController();
 			Scene adminScene = new Scene(sceneManager);
 			
 			Stage appStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 			
-			adminController.start();
+//			adminController.start();
 			
 			appStage.setScene(adminScene);
 			
 			appStage.show();
 			System.out.print("Clicked Me");
+		}
+		else {
+			System.out.print("Failed");
 		}
 		
 		

@@ -6,7 +6,6 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9.0.4" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LoginController">
 	<children>
       <Label layoutX="242.0" layoutY="95.0" prefHeight="23.0" prefWidth="117.0" text="Welcome!">
@@ -15,7 +14,7 @@
          </font>
       </Label>
       <Label layoutX="242.0" layoutY="158.0" text="Username" />
-      <TextField id="tfUsername" layoutX="242.0" layoutY="187.0" prefHeight="27.0" prefWidth="195.0" promptText="Username" />
-      <Button id="mLogIn" layoutX="381.0" layoutY="238.0" mnemonicParsing="false" text="Log In" />
+      <TextField fx:id="tfUsername" layoutX="242.0" layoutY="187.0" prefHeight="27.0" prefWidth="195.0" promptText="Username" />
+      <Button fx:id="mLogIn" layoutX="381.0" layoutY="238.0" mnemonicParsing="false" onAction="#login" onMouseClicked="#login" text="Log In" />
    </children>
 </AnchorPane>
