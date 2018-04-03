@@ -22,20 +22,20 @@ public class AdminController {
 	@FXML
 	public TextField tfUsername;
 	
-	public static ArrayList<String> nameandusername = new ArrayList<>();
-	public ObservableList<String> obsList;
+	public static ArrayList<String> userlist = new ArrayList<>();
+	public ObservableList<String> observableList;
 	
-	public static PhotoDriver ulistmanager = Main.driver;
+	public static PhotoDriver photodriver = Main.driver;
 	
 	public void start() {
 		System.out.println("Admin Page");
 		
 		redolist();
 		
-		obsList = FXCollections.observableArrayList(nameandusername);
-		listview.setItems(obsList);
+		observableList = FXCollections.observableArrayList(userlist);
+		listview.setItems(observableList);
 		
-		if(!nameandusername.isEmpty()) {
+		if(!userlist.isEmpty()) {
     		listview.getSelectionModel().select(0); //select first user
 		}
 	}
@@ -45,9 +45,9 @@ public class AdminController {
 	}
 	
 	public void AddUser(ActionEvent event) throws IOException {
-		ulistmanager.addUser(tfUsername.getText().trim());
+		photodriver.addUser(tfUsername.getText().trim());
 		update();
-		PhotoDriver.writeApp(ulistmanager);
+		PhotoDriver.writeApp(photodriver);
 		
 	}
 	
@@ -56,16 +56,16 @@ public class AdminController {
 	}
 	
 	public static void redolist() {
-		nameandusername.clear();
-		for (int i = 0; i < ulistmanager.getUsers().size(); i++) {
-			nameandusername.add(ulistmanager.getUsers().get(i).getUsername());
+		userlist.clear();
+		for (int i = 0; i < photodriver.getUsers().size(); i++) {
+			userlist.add(photodriver.getUsers().get(i).getUsername());
 		}
 		
 	}
 	
 	public void update() {
-		obsList = FXCollections.observableArrayList(nameandusername);
-		listview.setItems(obsList);
+		observableList = FXCollections.observableArrayList(userlist);
+		listview.setItems(observableList);
 		listview.refresh();
 	}
 
