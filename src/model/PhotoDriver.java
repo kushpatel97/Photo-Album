@@ -19,14 +19,44 @@ public class PhotoDriver implements Serializable {
 	public static final String storeDir = "dat";
 	public static final String storeFile = "users.dat";
 	public ArrayList<User> users;
+	public User current;
 	
 	
+	
+
+
 	public PhotoDriver() {
 		users = new ArrayList<User>();
 		users.add(new User("admin"));
 	}
 	
 	
+	public void addUser(String username) {
+		users.add(new User(username));
+	}
+	
+	public void deleteUser(String username) {
+		users.remove(new User(username));
+	}
+	
+	
+	
+	
+	public ArrayList<User> getUsers(){
+		return users;
+	}
+	
+	public void setUsers(ArrayList<User> users) {
+		this.users = users;
+	}
+	
+	public User getCurrent() {
+		return current;
+	}
+
+	public void setCurrent(User current) {
+		this.current = current;
+	}
 	
 	public static void writeApp(PhotoDriver pdApp) throws IOException {
 			ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(storeDir + File.separator + storeFile));
