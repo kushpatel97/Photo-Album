@@ -28,7 +28,7 @@ public class LoginController {
 		//Parent sceneManager;
 		
 
-		if(username.equals(admin)) {
+		if (username.equals(admin)) {
 			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/Admin.fxml"));
 			Parent sceneManager = (Parent) fxmlLoader.load();
 			AdminController adminController = fxmlLoader.getController();
@@ -43,7 +43,22 @@ public class LoginController {
 			appStage.show();
 			System.out.print("Clicked Me");
 		}
-		else if(username.isEmpty() || username == null) {
+		else if (isUser(username)) {
+			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/User.fxml"));
+			Parent sceneManager = (Parent) fxmlLoader.load();
+			// AdminController adminController = fxmlLoader.getController();
+			Scene adminScene = new Scene(sceneManager);
+			
+			Stage appStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+			
+			// adminController.start();
+			
+			appStage.setScene(adminScene);
+			
+			appStage.show();
+			System.out.print("Clicked Me");
+		}
+		else if (username.isEmpty() || username == null) {
 			System.out.print("Empty String");
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setTitle("Error Dialog");
@@ -59,5 +74,9 @@ public class LoginController {
 		}
 		
 		
+	}
+	
+	public static boolean isUser(String user) {
+		return true;
 	}
 }
