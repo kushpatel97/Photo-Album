@@ -20,14 +20,15 @@ public class Superuser implements Serializable {
 	public static final String storeFile = "users.dat";
 	public ArrayList<User> users;
 	public User current;
+	public boolean loggedIn;
 	
 	
-	
-
 
 	public Superuser() {
 		users = new ArrayList<User>();
 		users.add(new User("admin"));
+		current = null;
+		loggedIn = false;
 	}
 	
 	
@@ -36,11 +37,18 @@ public class Superuser implements Serializable {
 	}
 	
 	public void deleteUser(String username) {
-		users.remove(new User(username));
+		int index = users.indexOf(new User(username));
+		users.remove(index);
 	}
 	
-	
-	
+	public boolean exists(String username) {
+		for(User user : users) {
+			if(user.getUsername().equals(username)) {
+				return true;
+			}
+		}
+		return false;
+	}
 	
 	public ArrayList<User> getUsers(){
 		return users;
@@ -58,13 +66,13 @@ public class Superuser implements Serializable {
 		this.current = current;
 	}
 	
-	public static void writeApp(Superuser pdApp) throws IOException {
+	public static void save(Superuser pdApp) throws IOException {
 			ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(storeDir + File.separator + storeFile));
 			oos.writeObject(pdApp);
 			oos.close();
 	}
 	
-	public static Superuser readApp() throws IOException, ClassNotFoundException {
+	public static Superuser load() throws IOException, ClassNotFoundException {
 		ObjectInputStream ois = new ObjectInputStream(new FileInputStream(storeDir + File.separator + storeFile));
 		Superuser userList = (Superuser) ois.readObject();
 		ois.close();

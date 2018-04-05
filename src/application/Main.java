@@ -39,7 +39,7 @@ public class Main extends Application {
 		mainStage.setOnCloseRequest(new EventHandler<WindowEvent>(){
 			public void handle(WindowEvent we) {
 				try {
-					Superuser.writeApp(driver);
+					Superuser.save(driver);
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -51,7 +51,7 @@ public class Main extends Application {
 	
 	public static void main(String[] args) throws IOException, ClassNotFoundException {
 		try {
-			driver = Superuser.readApp();
+			driver = Superuser.load();
 		}catch (IOException e) {
 			e.printStackTrace();
 		}

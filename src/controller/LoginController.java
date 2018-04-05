@@ -33,13 +33,9 @@ public class LoginController {
 			Parent sceneManager = (Parent) fxmlLoader.load();
 			AdminController adminController = fxmlLoader.getController();
 			Scene adminScene = new Scene(sceneManager);
-			
 			Stage appStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-			
 			adminController.start();
-			
 			appStage.setScene(adminScene);
-			
 			appStage.show();
 			System.out.print("Clicked Me");
 		}

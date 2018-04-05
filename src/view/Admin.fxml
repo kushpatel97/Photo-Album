@@ -25,8 +25,8 @@
       <ListView fx:id="listview" prefHeight="200.0" prefWidth="200.0" GridPane.rowSpan="3" />
       <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowSpan="3">
          <children>
-            <Button fx:id="mCreate" layoutX="31.0" layoutY="304.0" mnemonicParsing="false" onAction="#AddUser" text="Create User" />
-            <Button fx:id="mDelete" layoutX="172.0" layoutY="304.0" mnemonicParsing="false" onAction="#DeleteUser" text="Delete User" />
+            <Button fx:id="mCreate" layoutX="31.0" layoutY="304.0" mnemonicParsing="false" onAction="#addUser" text="Create User" />
+            <Button fx:id="mDelete" layoutX="172.0" layoutY="304.0" mnemonicParsing="false" onAction="#deleteUser" text="Delete User" />
             <TextField fx:id="tfUsername" layoutX="31.0" layoutY="190.0" prefHeight="25.0" prefWidth="219.0" />
             <Label layoutX="31.0" layoutY="160.0" text="Username">
                <font>

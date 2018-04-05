@@ -9,6 +9,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.control.Alert.AlertType;
 import model.*;
 
 public class AdminController {
@@ -23,18 +24,12 @@ public class AdminController {
 	public TextField tfUsername;
 	
 	public static ArrayList<String> userlist = new ArrayList<>();
-	public ObservableList<String> observableList;
-	
-	public static Superuser photodriver = Main.driver;
+	public ObservableList<String> observableList;	
+	public static Superuser adminuser = Main.driver;
 	
 	public void start() {
 		System.out.println("Admin Page");
-		
-		redolist();
-		
-		observableList = FXCollections.observableArrayList(userlist);
-		listview.setItems(observableList);
-		
+		update();
 		if(!userlist.isEmpty()) {
     		listview.getSelectionModel().select(0); //select first user
 		}
@@ -44,29 +39,42 @@ public class AdminController {
 		
 	}
 	
-	public void AddUser(ActionEvent event) throws IOException {
-		photodriver.addUser(tfUsername.getText().trim());
-		update();
-		Superuser.writeApp(photodriver);
-		
-	}
-	
-	public void DeleteUser(ActionEvent event) {
-		
-	}
-	
-	public static void redolist() {
-		userlist.clear();
-		for (int i = 0; i < photodriver.getUsers().size(); i++) {
-			userlist.add(photodriver.getUsers().get(i).getUsername());
+	public void addUser(ActionEvent event) throws IOException {
+		String username = tfUsername.getText().trim();
+		if(username.isEmpty() || username == null) {
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setTitle("Empty Field");
+			alert.setContentText("Please enter a username.");
+			alert.showAndWait();
+			return;
 		}
+		else if(adminuser.exists(username)) {
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setTitle("Username already exists.");
+			alert.setContentText("Try entering a new username!");
+			alert.showAndWait();
+			return;
+		}else {
+			adminuser.addUser(username);
+			update();
+		}
+		Superuser.save(adminuser);	
+	}
+	
+	public void deleteUser(ActionEvent event) {
 		
 	}
 	
 	public void update() {
+		userlist.clear();
+		for (int i = 0; i < adminuser.getUsers().size(); i++) {
+			userlist.add(adminuser.getUsers().get(i).getUsername());
+		}
 		observableList = FXCollections.observableArrayList(userlist);
 		listview.setItems(observableList);
 		listview.refresh();
 	}
+	
+	
 
 }
