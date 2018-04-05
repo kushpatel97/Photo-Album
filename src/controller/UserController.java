@@ -20,19 +20,19 @@ public class UserController {
 	public ListView<String> listview;
 	
 	@FXML
-	public Button mCreate, mDelete, mLogOff;
+	public Button mSortBy, mLogOff, mAddAlbum, mOpenAlbum, mRenameAlbum, mDeleteAlbum;
 	
 	@FXML
-	public TextField tfUsername;
+	public TextField tfUsername, tfUser; //user1 and user2
 	
-	public static ArrayList<String> userlist = new ArrayList<>();
+	public static ArrayList<String> albumlist = new ArrayList<>();
 	public ObservableList<String> observableList;	
-	public static Superuser adminuser = Main.driver;
+	public static Superuser user = Main.driver;
 	
 	public void start() {
-		System.out.println("Admin Page");
+		System.out.println("User Page");
 		update();
-		if(!userlist.isEmpty()) {
+		if(!albumlist.isEmpty()) {
     		listview.getSelectionModel().select(0); //select first user
 		}
 	}
@@ -58,17 +58,17 @@ public class UserController {
 			alert.showAndWait();
 			return;
 		}
-		else if(adminuser.exists(username)) {
+		else if(user.exists(username)) {
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setTitle("Username already exists.");
 			alert.setContentText("Try entering a new username!");
 			alert.showAndWait();
 			return;
 		}else {
-			adminuser.addUser(username);
+			user.addUser(username);
 			update();
 		}
-		Superuser.save(adminuser);	
+		Superuser.save(user);	
 	}
 	
 	public void deleteUser(ActionEvent event) {
@@ -76,11 +76,11 @@ public class UserController {
 	}
 	
 	public void update() {
-		userlist.clear();
-		for (int i = 0; i < adminuser.getUsers().size(); i++) {
-			userlist.add(adminuser.getUsers().get(i).getUsername());
+		albumlist.clear();
+		for (int i = 0; i < user.getUsers().size(); i++) {
+			albumlist.add(user.getUsers().get(i).getUsername());
 		}
-		observableList = FXCollections.observableArrayList(userlist);
+		observableList = FXCollections.observableArrayList(albumlist);
 		listview.setItems(observableList);
 		listview.refresh();
 	}
