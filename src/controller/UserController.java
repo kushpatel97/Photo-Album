@@ -15,7 +15,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import model.Superuser;
 
-public class UserController {
+public class UserController implements LogoutController{
 	@FXML
 	public ListView<String> listview;
 	
@@ -37,8 +37,9 @@ public class UserController {
 		}
 	}
 	
-	public void LogOut(ActionEvent event) {
-		
+	public void logOut(ActionEvent event) throws IOException {
+		logMeOut(event);
+		System.out.println("Logged Out");
 	}
 	
 	public void AddUser() {
@@ -76,6 +77,8 @@ public class UserController {
 	}
 	
 	public void update() {
+		tfUser.setText("asdfafa");
+		
 		albumlist.clear();
 		for (int i = 0; i < user.getUsers().size(); i++) {
 			albumlist.add(user.getUsers().get(i).getUsername());

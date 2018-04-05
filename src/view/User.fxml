@@ -32,7 +32,7 @@
             <Button fx:id="mCreate" layoutX="31.0" layoutY="304.0" mnemonicParsing="false" onAction="#AddUser" text="Open Album" />
             <Button fx:id="mDelete" layoutX="172.0" layoutY="304.0" mnemonicParsing="false" onAction="#DeleteUser" text="Delete Album" />
             <TextField fx:id="tfUsername" layoutX="23.0" layoutY="80.0" prefHeight="25.0" prefWidth="219.0" />
-            <Button fx:id="mLogOff" layoutX="218.0" layoutY="1.0" mnemonicParsing="false" onAction="#LogOut" text="Log Off" />
+            <Button fx:id="mLogOff" layoutX="218.0" layoutY="1.0" mnemonicParsing="false" onAction="#logOut" text="Log Off" />
             <Label layoutX="23.0" layoutY="52.0" text="Album Info">
                <font>
                   <Font size="14.0" />
