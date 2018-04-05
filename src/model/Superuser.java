@@ -36,9 +36,14 @@ public class Superuser implements Serializable {
 		users.add(new User(username));
 	}
 	
-	public void deleteUser(String username) {
-		int index = users.indexOf(new User(username));
+	public void deleteUser(int index) {
 		users.remove(index);
+		System.out.println(users);
+	}
+	
+	public void deleteUser(String username) {
+		User temp = new User(username);
+		users.remove(temp);
 	}
 	
 	public boolean exists(String username) {

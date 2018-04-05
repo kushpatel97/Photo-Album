@@ -37,7 +37,7 @@ public class LoginController {
 			adminController.start();
 			appStage.setScene(adminScene);
 			appStage.show();
-			System.out.print("Clicked Me");
+			System.out.println("Clicked Me");
 		}
 		else if (isUser(username)) {
 			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/User.fxml"));
@@ -52,7 +52,7 @@ public class LoginController {
 			appStage.setScene(adminScene);
 			
 			appStage.show();
-			System.out.print("Clicked Me");
+			System.out.println("Clicked Me");
 		}
 		else if (username.isEmpty() || username == null) {
 			System.out.print("Empty String");

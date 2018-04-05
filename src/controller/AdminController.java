@@ -31,8 +31,9 @@ public class AdminController {
 		System.out.println("Admin Page");
 		update();
 		if(!userlist.isEmpty()) {
-    		listview.getSelectionModel().select(0); //select first user
+    		listview.getSelectionModel().select(0);
 		}
+		System.out.println(userlist.size());
 	}
 	
 	public void LogOut(ActionEvent event) {
@@ -57,22 +58,64 @@ public class AdminController {
 		}else {
 			adminuser.addUser(username);
 			update();
+			tfUsername.clear();
 		}
 		Superuser.save(adminuser);	
 	}
 	
-	public void deleteUser(ActionEvent event) {
+	public void deleteUser(ActionEvent event) throws IOException {
+
+		int index = listview.getSelectionModel().getSelectedIndex();
+		int adminList = userlist.indexOf("Admin");
+		
+		
+		System.out.println(adminList);
+		   
+		   Alert alert = new Alert(AlertType.CONFIRMATION);
+		   alert.setTitle("Confirm Delete");
+		   alert.setHeaderText(null);
+		   alert.setContentText("Are you sure you want to delete this User?");
+
+		   Optional<ButtonType> result = alert.showAndWait();
+		   if (result.get() == ButtonType.OK) { 
+			  
+			   adminuser.deleteUser(index);
+			   update();
+			   Superuser.save(adminuser);
+			   
+			   if(adminuser.getUsers().size() == 1) {
+					mDelete.setVisible(false);
+		       }
+			   else {
+				   int lastuserindex = adminuser.getUsers().size();
+				   if(adminuser.getUsers().size() == 1) { 
+					   listview.getSelectionModel().select(0);
+				   }
+				   else if(index == lastuserindex) { 
+					   listview.getSelectionModel().select(lastuserindex-1);
+				   }
+				   else { 
+					   listview.getSelectionModel().select(index);
+				   }
+			   }
+			      
+		   } else {
+			   return;
+		   }
+		   return;
+		 
 		
 	}
-	
 	public void update() {
 		userlist.clear();
 		for (int i = 0; i < adminuser.getUsers().size(); i++) {
 			userlist.add(adminuser.getUsers().get(i).getUsername());
 		}
+		listview.refresh();
 		observableList = FXCollections.observableArrayList(userlist);
 		listview.setItems(observableList);
 		listview.refresh();
+		System.out.println(userlist);
 	}
 	
 	
