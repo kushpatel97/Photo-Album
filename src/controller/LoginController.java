@@ -71,6 +71,19 @@ public class LoginController {
 			else {
 				alert.close();
 			}
+		} else {
+			System.out.println("Incorrect Input");
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setTitle("Login Issue Encountered");
+			alert.setHeaderText("Please enter a valid username");
+			Optional<ButtonType> buttonClicked=alert.showAndWait();
+			if (buttonClicked.get()==ButtonType.OK) {
+				alert.close();
+			}
+			else {
+				alert.close();
+			}
+			
 		}
 		
 		
