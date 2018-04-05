@@ -12,7 +12,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import model.*;
 
-public class AdminController {
+public class AdminController implements LogoutController {
 	
 	@FXML
 	public ListView<String> listview;
@@ -36,8 +36,9 @@ public class AdminController {
 		System.out.println(userlist.size());
 	}
 	
-	public void LogOut(ActionEvent event) {
-		
+	public void logOut(ActionEvent event) throws IOException {
+		logMeOut(event);
+		System.out.println("Logged Out");
 	}
 	
 	public void addUser(ActionEvent event) throws IOException {

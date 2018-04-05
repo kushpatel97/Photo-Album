@@ -33,7 +33,7 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <Button fx:id="mLogOff" layoutX="218.0" layoutY="1.0" mnemonicParsing="false" onAction="#LogOut" text="Log Off" />
+            <Button fx:id="mLogOff" layoutX="218.0" layoutY="1.0" mnemonicParsing="false" onAction="#logOut" text="Log Off" />
          </children>
       </AnchorPane>
    </children>
