@@ -3,6 +3,7 @@ package controller;
 import java.io.IOException;
 import java.util.Optional;
 
+import application.Main;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,6 +13,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
+import model.Superuser;
 
 public class LoginController {
 	
@@ -20,6 +22,8 @@ public class LoginController {
 	@FXML public TextField tfUsername;
 	
 	public final String admin = "admin";
+	
+	public static Superuser driver = Main.driver;
 
 	public void login(ActionEvent event) throws IOException {
 		
@@ -73,6 +77,12 @@ public class LoginController {
 	}
 	
 	public static boolean isUser(String user) {
-		return true;
+		for (int i = 0; i < driver.getUsers().size(); i++) {
+			if (driver.getUsers().get(i).getUsername().equals(user)) {
+				return true;
+			}
+		}
+		
+		return false;
 	}
 }
