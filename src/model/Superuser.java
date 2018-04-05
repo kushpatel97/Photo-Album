@@ -9,7 +9,7 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.*;
 
-public class PhotoDriver implements Serializable {
+public class Superuser implements Serializable {
 	
 	/**
 	 * Class that manages the photo album/
@@ -25,7 +25,7 @@ public class PhotoDriver implements Serializable {
 	
 
 
-	public PhotoDriver() {
+	public Superuser() {
 		users = new ArrayList<User>();
 		users.add(new User("admin"));
 	}
@@ -58,15 +58,15 @@ public class PhotoDriver implements Serializable {
 		this.current = current;
 	}
 	
-	public static void writeApp(PhotoDriver pdApp) throws IOException {
+	public static void writeApp(Superuser pdApp) throws IOException {
 			ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(storeDir + File.separator + storeFile));
 			oos.writeObject(pdApp);
 			oos.close();
 	}
 	
-	public static PhotoDriver readApp() throws IOException, ClassNotFoundException {
+	public static Superuser readApp() throws IOException, ClassNotFoundException {
 		ObjectInputStream ois = new ObjectInputStream(new FileInputStream(storeDir + File.separator + storeFile));
-		PhotoDriver userList = (PhotoDriver) ois.readObject();
+		Superuser userList = (Superuser) ois.readObject();
 		ois.close();
 		return userList;
 		

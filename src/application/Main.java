@@ -8,14 +8,14 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
-import model.PhotoDriver;
+import model.Superuser;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 
 
 public class Main extends Application {
 	
-	public static PhotoDriver driver = new PhotoDriver();
+	public static Superuser driver = new Superuser();
 	public Stage mainStage;
 	
 	@Override
@@ -39,7 +39,7 @@ public class Main extends Application {
 		mainStage.setOnCloseRequest(new EventHandler<WindowEvent>(){
 			public void handle(WindowEvent we) {
 				try {
-					PhotoDriver.writeApp(driver);
+					Superuser.writeApp(driver);
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -51,7 +51,7 @@ public class Main extends Application {
 	
 	public static void main(String[] args) throws IOException, ClassNotFoundException {
 		try {
-			driver = PhotoDriver.readApp();
+			driver = Superuser.readApp();
 		}catch (IOException e) {
 			e.printStackTrace();
 		}

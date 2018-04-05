@@ -25,7 +25,7 @@ public class AdminController {
 	public static ArrayList<String> userlist = new ArrayList<>();
 	public ObservableList<String> observableList;
 	
-	public static PhotoDriver photodriver = Main.driver;
+	public static Superuser photodriver = Main.driver;
 	
 	public void start() {
 		System.out.println("Admin Page");
@@ -47,7 +47,7 @@ public class AdminController {
 	public void AddUser(ActionEvent event) throws IOException {
 		photodriver.addUser(tfUsername.getText().trim());
 		update();
-		PhotoDriver.writeApp(photodriver);
+		Superuser.writeApp(photodriver);
 		
 	}
 	
