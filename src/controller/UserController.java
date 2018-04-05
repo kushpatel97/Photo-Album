@@ -78,7 +78,6 @@ public class UserController implements LogoutController{
 	
 	public void update() {
 		tfUser.setText("asdfafa");
-		
 		albumlist.clear();
 		for (int i = 0; i < user.getUsers().size(); i++) {
 			albumlist.add(user.getUsers().get(i).getUsername());

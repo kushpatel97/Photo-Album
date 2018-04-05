@@ -93,7 +93,7 @@ public class LoginController {
 		for (int i = 0; i < driver.getUsers().size(); i++) {
 			if (driver.getUsers().get(i).getUsername().equals(user)) {
 				return true;
-			}
+			} 
 		}
 		
 		return false;
