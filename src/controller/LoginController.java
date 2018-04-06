@@ -44,17 +44,14 @@ public class LoginController {
 			System.out.println("Clicked Me");
 		}
 		else if (isUser(username)) {
+			UserController.username = username;
 			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/User.fxml"));
 			Parent sceneManager = (Parent) fxmlLoader.load();
-			// AdminController adminController = fxmlLoader.getController();
-			Scene adminScene = new Scene(sceneManager);
-			
+			UserController userController = fxmlLoader.getController();
+			Scene userScene = new Scene(sceneManager);
 			Stage appStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-			
-			// adminController.start();
-			
-			appStage.setScene(adminScene);
-			
+			userController.start();
+			appStage.setScene(userScene);
 			appStage.show();
 			System.out.println("Clicked Me");
 		}

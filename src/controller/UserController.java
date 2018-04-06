@@ -12,6 +12,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.text.Text;
 import javafx.scene.control.Alert.AlertType;
 import model.Superuser;
 
@@ -23,11 +24,16 @@ public class UserController implements LogoutController{
 	public Button mSortBy, mLogOff, mAddAlbum, mOpenAlbum, mRenameAlbum, mDeleteAlbum;
 	
 	@FXML
-	public TextField tfUsername, tfUser; //user1 and user2
+	public Text tUser;
+	
+	@FXML
+	public TextField tfUsername; //user1 and user2
 	
 	public static ArrayList<String> albumlist = new ArrayList<>();
 	public ObservableList<String> observableList;	
 	public static Superuser user = Main.driver;
+	
+	public static String username;
 	
 	public void start() {
 		System.out.println("User Page");
@@ -77,7 +83,7 @@ public class UserController implements LogoutController{
 	}
 	
 	public void update() {
-		tfUser.setText("asdfafa");
+		tUser.setText("User: " + username);
 		albumlist.clear();
 		for (int i = 0; i < user.getUsers().size(); i++) {
 			albumlist.add(user.getUsers().get(i).getUsername());

@@ -46,6 +46,11 @@
             <TextField fx:id="tfUsername1" layoutX="23.0" layoutY="164.0" prefHeight="25.0" prefWidth="219.0" />
             <Button fx:id="mCreate1" layoutX="31.0" layoutY="265.0" mnemonicParsing="false" onAction="#AddUser" text="Add" />
             <Button fx:id="mCreate11" layoutX="172.0" layoutY="265.0" mnemonicParsing="false" onAction="#AddUser" text="Rename" />
+            <Text fx:id="tUser" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="185.99999782443047">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
          </children>
       </AnchorPane>
       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="List of Albums" GridPane.halignment="LEFT" GridPane.valignment="TOP">
