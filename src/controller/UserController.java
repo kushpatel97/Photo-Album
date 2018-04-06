@@ -48,6 +48,11 @@ public class UserController implements LogoutController{
     		listview.getSelectionModel().select(0); //select first user
 		}
 	}
+	
+	public void addAlbum() {
+		
+	}
+	
 	public void renameAlbum() {
 		
 	}
@@ -63,23 +68,11 @@ public class UserController implements LogoutController{
 		System.out.println("Logged Out");
 	}
 	
-	public void AddUser() {
-		
-	}
-	
-	public void DeleteUser() {
-		
-	}
-	
-	public void deleteUser(ActionEvent event) {
-		
-	}
-	
 	public void update() {
 		tUser.setText("User: " + username);
 		user = adminuser.getUser(username);
 		
-		user.addAlbum("Hello testing");
+		//user.addAlbum("Hello testing");
 		
 		albumlist.clear();
 		for (int i = 0; i < user.getAlbums().size(); i++) {

@@ -29,8 +29,8 @@
          </GridPane.margin></ListView>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowSpan="3">
          <children>
-            <Button fx:id="mCreate" layoutX="31.0" layoutY="304.0" mnemonicParsing="false" onAction="#AddUser" text="Open Album" />
-            <Button fx:id="mDelete" layoutX="172.0" layoutY="304.0" mnemonicParsing="false" onAction="#DeleteUser" text="Delete Album" />
+            <Button fx:id="mCreate" layoutX="31.0" layoutY="304.0" mnemonicParsing="false" onAction="#openAlbum" text="Open Album" />
+            <Button fx:id="mDelete" layoutX="172.0" layoutY="304.0" mnemonicParsing="false" onAction="#deleteAlbum" text="Delete Album" />
             <TextField fx:id="tfUsername" layoutX="23.0" layoutY="80.0" prefHeight="25.0" prefWidth="219.0" />
             <Button fx:id="mLogOff" layoutX="218.0" layoutY="1.0" mnemonicParsing="false" onAction="#logOut" text="Log Off" />
             <Label layoutX="23.0" layoutY="52.0" text="Album Info">
@@ -44,8 +44,8 @@
                </font>
             </Label>
             <TextField fx:id="tfUsername1" layoutX="23.0" layoutY="164.0" prefHeight="25.0" prefWidth="219.0" />
-            <Button fx:id="mCreate1" layoutX="31.0" layoutY="265.0" mnemonicParsing="false" onAction="#AddUser" text="Add" />
-            <Button fx:id="mCreate11" layoutX="172.0" layoutY="265.0" mnemonicParsing="false" onAction="#AddUser" text="Rename" />
+            <Button fx:id="mCreate1" layoutX="31.0" layoutY="265.0" mnemonicParsing="false" onAction="#addAlbum" text="Add" />
+            <Button fx:id="mCreate11" layoutX="172.0" layoutY="265.0" mnemonicParsing="false" onAction="#renameAlbum" text="Rename" />
             <Text fx:id="tUser" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="185.99999782443047">
                <font>
                   <Font size="18.0" />
