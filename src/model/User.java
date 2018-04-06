@@ -57,10 +57,4 @@ public class User implements Serializable{
 		this.currentAlbum = currentAlbum;
 	}
 
-	public void add(String albumName) {
-		// TODO Auto-generated method stub
-		
-	}
-
-
 }

@@ -29,28 +29,24 @@
          </GridPane.margin></ListView>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowSpan="3">
          <children>
-            <Button fx:id="mCreate" layoutX="31.0" layoutY="304.0" mnemonicParsing="false" onAction="#openAlbum" text="Open Album" />
-            <Button fx:id="mDelete" layoutX="172.0" layoutY="304.0" mnemonicParsing="false" onAction="#deleteAlbum" text="Delete Album" />
-            <TextField fx:id="tfUsername" layoutX="23.0" layoutY="80.0" prefHeight="25.0" prefWidth="219.0" />
+            <Button fx:id="mOpenAlbum" layoutX="31.0" layoutY="304.0" mnemonicParsing="false" onAction="#openAlbum" text="Open Album" />
+            <Button fx:id="mDeleteAlbum" layoutX="172.0" layoutY="304.0" mnemonicParsing="false" onAction="#deleteAlbum" text="Delete Album" />
+            <TextField fx:id="tfName" layoutX="23.0" layoutY="151.0" prefHeight="25.0" prefWidth="219.0" promptText="Album Name" />
             <Button fx:id="mLogOff" layoutX="218.0" layoutY="1.0" mnemonicParsing="false" onAction="#logOut" text="Log Off" />
-            <Label layoutX="23.0" layoutY="52.0" text="Album Info">
+            <Label layoutX="22.0" layoutY="133.0" text="Album Info">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label layoutX="23.0" layoutY="133.0" text="Album Info">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Label>
-            <TextField fx:id="tfUsername1" layoutX="23.0" layoutY="164.0" prefHeight="25.0" prefWidth="219.0" />
-            <Button fx:id="mCreate1" layoutX="31.0" layoutY="265.0" mnemonicParsing="false" onAction="#addAlbum" text="Add" />
-            <Button fx:id="mCreate11" layoutX="172.0" layoutY="265.0" mnemonicParsing="false" onAction="#renameAlbum" text="Rename" />
-            <Text fx:id="tUser" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="185.99999782443047">
+            <Button fx:id="mAddAlbum" layoutX="31.0" layoutY="265.0" mnemonicParsing="false" onAction="#addAlbum" text="Add" />
+            <Button fx:id="mRenameAlbum" layoutX="172.0" layoutY="265.0" mnemonicParsing="false" onAction="#renameAlbum" text="Rename" />
+            <Text fx:id="tUser" layoutX="14.0" layoutY="81.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="185.99999782443047">
                <font>
                   <Font size="18.0" />
                </font>
             </Text>
+            <Text fx:id="tNumber" layoutX="23.0" layoutY="203.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Number of Photos:" wrappingWidth="218.99999678134918" />
+            <Text fx:id="tDateSpan" layoutX="23.0" layoutY="230.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date Span:" wrappingWidth="218.99999678134918" />
          </children>
       </AnchorPane>
       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="List of Albums" GridPane.halignment="LEFT" GridPane.valignment="TOP">

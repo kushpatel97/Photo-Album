@@ -29,17 +29,17 @@ public class UserController implements LogoutController{
 	public MenuButton mSortBy;
 	
 	@FXML
-	public Text tUser;
+	public Text tUser, tNumber, tDateSpan;
 	
 	@FXML
-	public TextField tfUsername; //user1 and user2
+	public TextField tfName; //user1 and user2
 	
 	public static String username;
 	
 	public static ArrayList<String> albumlist = new ArrayList<>();
 	public ObservableList<String> observableList;	
 	public static Superuser adminuser = Main.driver;
-	public static User user; // = adminuser.getUser(username);
+	public static User user; // used to store current user
 	
 	public void start() {
 		System.out.println("User Page");
@@ -70,6 +70,7 @@ public class UserController implements LogoutController{
 	
 	public void update() {
 		tUser.setText("User: " + username);
+		tfName.setText(listview.getSelectionModel().getSelectedItem());
 		user = adminuser.getUser(username);
 		
 		//user.addAlbum("Hello testing");
