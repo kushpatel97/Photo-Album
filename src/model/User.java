@@ -13,6 +13,12 @@ public class User implements Serializable{
 	public ArrayList<Album> albums;
 	public Album currentAlbum;
 
+	public void printAlbums() {
+		for (Album album: albums) {
+			System.out.println(album.albumName);
+		}
+	}
+	
 	public User(String username) {
 		this.username = username;
 		albums = new ArrayList<Album>();
@@ -49,6 +55,11 @@ public class User implements Serializable{
 
 	public void setCurrentAlbum(Album currentAlbum) {
 		this.currentAlbum = currentAlbum;
+	}
+
+	public void add(String albumName) {
+		// TODO Auto-generated method stub
+		
 	}
 
 

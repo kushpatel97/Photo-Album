@@ -16,6 +16,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import javafx.scene.control.Alert.AlertType;
 import model.Superuser;
+import model.User;
 
 public class UserController implements LogoutController{
 	@FXML
@@ -33,11 +34,12 @@ public class UserController implements LogoutController{
 	@FXML
 	public TextField tfUsername; //user1 and user2
 	
+	public static String username;
+	
 	public static ArrayList<String> albumlist = new ArrayList<>();
 	public ObservableList<String> observableList;	
-	public static Superuser user = Main.driver;
-	
-	public static String username;
+	public static Superuser adminuser = Main.driver;
+	public static User user; // = adminuser.getUser(username);
 	
 	public void start() {
 		System.out.println("User Page");
@@ -69,37 +71,19 @@ public class UserController implements LogoutController{
 		
 	}
 	
-	public void addUser(ActionEvent event) throws IOException {
-		String username = tfUsername.getText().trim();
-		if(username.isEmpty() || username == null) {
-			Alert alert = new Alert(AlertType.ERROR);
-			alert.setTitle("Empty Field");
-			alert.setContentText("Please enter a username.");
-			alert.showAndWait();
-			return;
-		}
-		else if(user.exists(username)) {
-			Alert alert = new Alert(AlertType.ERROR);
-			alert.setTitle("Username already exists.");
-			alert.setContentText("Try entering a new username!");
-			alert.showAndWait();
-			return;
-		}else {
-			user.addUser(username);
-			update();
-		}
-		Superuser.save(user);	
-	}
-	
 	public void deleteUser(ActionEvent event) {
 		
 	}
 	
 	public void update() {
 		tUser.setText("User: " + username);
+		user = adminuser.getUser(username);
+		
+		user.addAlbum("Hello testing");
+		
 		albumlist.clear();
-		for (int i = 0; i < user.getUsers().size(); i++) {
-			albumlist.add(user.getUsers().get(i).getUsername());
+		for (int i = 0; i < user.getAlbums().size(); i++) {
+			albumlist.add(user.getAlbums().get(i).albumName);
 		}
 		observableList = FXCollections.observableArrayList(albumlist);
 		listview.setItems(observableList);

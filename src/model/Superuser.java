@@ -59,6 +59,16 @@ public class Superuser implements Serializable {
 		return users;
 	}
 	
+	public User getUser(String username) {
+		for(User user : users) {
+			if(user.getUsername().equals(username)) {
+				return user;
+			}
+		}
+		
+		return null;
+	}
+	
 	public void setUsers(ArrayList<User> users) {
 		this.users = users;
 	}
