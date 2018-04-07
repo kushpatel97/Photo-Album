@@ -33,8 +33,7 @@ public class User implements Serializable{
 		albums = new ArrayList<Album>();
 	}
 	
-	public void addAlbum(String aName) {
-		Album album = new Album(aName);
+	public void addAlbum(Album album) {
 		albums.add(album);
 	}
 	
@@ -54,9 +53,9 @@ public class User implements Serializable{
 		return albums;
 	}
 	
-	public boolean exists(String albumname) {
+	public boolean exists(Album albumname) {
 		for(Album album : albums) {
-			if (album.getName().equals(albumname)) {
+			if (album.getName().equals(albumname.albumName)) {
 				return true;
 			}
 		}

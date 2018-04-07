@@ -23,7 +23,7 @@ import model.User;
 
 public class UserController implements LogoutController{
 	@FXML
-	public ListView<String> listview;
+	public ListView<Album> listview;
 	
 	@FXML
 	public Button mLogOff, mAddAlbum, mOpenAlbum, mRenameAlbum, mDeleteAlbum;
@@ -39,8 +39,8 @@ public class UserController implements LogoutController{
 	
 	public static String username;
 	
-	public static ArrayList<String> albumlist = new ArrayList<>();
-	public ObservableList<String> observableList;	
+	public static ArrayList<Album> albumlist = new ArrayList<>();
+	public ObservableList<Album> observableList;	
 	public static Superuser adminuser = Main.driver;
 	public static User user; // used to store current user
 	
@@ -53,34 +53,37 @@ public class UserController implements LogoutController{
 		
 		// Listen for selection changes
 		if (albumlist.size() > 0) {
-			tfName.setText(albumlist.get(0));	
+			tfName.setText(albumlist.get(0).albumName);	
 		}
-		listview.getSelectionModel().selectedItemProperty().addListener( (v, oldValue, newValue) -> updateContent(newValue));
+		listview.getSelectionModel().selectedItemProperty().addListener( (v, oldValue, newValue) -> updateContent(newValue) );
 
 	}
 	
 	// updates 
-	public void updateContent(String newValue) {
-		tfName.setText(newValue);
+	public void updateContent(Album newValue) {
+		if (newValue != null) {
+			tfName.setText(newValue.albumName);	
+		}
 	}
 	
 	public void addAlbum() throws IOException {
 		String albumname = tfNewAlbum.getText().trim();
+		Album album = new Album(albumname);
+		
 		if(albumname.isEmpty() || albumname == null) {
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setTitle("Empty Field");
 			alert.setContentText("Please enter an album name.");
 			alert.showAndWait();
 			return;
-		}
-		else if(user.exists(albumname)) {
+		} else if(user.exists(album)) {
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setTitle("Album already exists.");
 			alert.setContentText("Try entering a new album!");
 			alert.showAndWait();
 			return;
 		}else {
-			user.addAlbum(albumname);
+			user.addAlbum(album);
 			update();
 			tfNewAlbum.clear();
 		}
@@ -89,15 +92,28 @@ public class UserController implements LogoutController{
 	
 	public void renameAlbum() throws IOException {
 		String newName = tfName.getText().trim();
-		
+
 		int index = listview.getSelectionModel().getSelectedIndex();
 		Album album = user.getAlbum(index);
 		Optional<ButtonType> result;
+		Album tempAlbum = new Album(newName);
 		
 		if (newName.length() == 0) {
 			Alert alert2 = new Alert(AlertType.ERROR);
 			alert2.setTitle("Rename Error");
 			alert2.setContentText("Please enter a valid album name.");
+			alert2.showAndWait();
+			return;
+		} else if (newName.equals(album.albumName)) {
+			Alert alert2 = new Alert(AlertType.ERROR);
+			alert2.setTitle("Rename Error");
+			alert2.setContentText("No changes made. Please enter a valid album name before clicking 'Rename'.");
+			alert2.showAndWait();
+			return;
+		} else if (user.exists(tempAlbum)) {
+			Alert alert2 = new Alert(AlertType.ERROR);
+			alert2.setTitle("Rename Error");
+			alert2.setContentText("Album name already in use.");
 			alert2.showAndWait();
 			return;
 		} else {
@@ -164,7 +180,7 @@ public class UserController implements LogoutController{
 		
 		albumlist.clear();
 		for (int i = 0; i < user.getAlbums().size(); i++) {
-			albumlist.add(user.getAlbums().get(i).albumName);
+			albumlist.add(user.getAlbums().get(i));
 		}
 		observableList = FXCollections.observableArrayList(albumlist);
 		listview.setItems(observableList);

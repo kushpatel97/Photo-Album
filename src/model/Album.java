@@ -29,4 +29,9 @@ public class Album implements Serializable{
 	public void addPhoto() {
 		photoCount++;
 	}
+	
+	@Override
+	public String toString() {
+		return getName();
+	}
 }
