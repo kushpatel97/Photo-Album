@@ -18,6 +18,14 @@ public class Album implements Serializable{
 		photoslist = new ArrayList<Photo>();
 	}
 	
+	public String getName() {
+		return this.albumName;
+	}
+	
+	public void rename(String name) {
+		this.albumName = name;
+	}
+	
 	public void addPhoto() {
 		photoCount++;
 	}
