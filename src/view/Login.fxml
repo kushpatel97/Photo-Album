@@ -8,13 +8,13 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9.0.4" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LoginController">
 	<children>
-      <Label layoutX="242.0" layoutY="95.0" prefHeight="23.0" prefWidth="117.0" text="Welcome!">
+      <Label layoutX="255.0" layoutY="95.0" prefHeight="23.0" prefWidth="90.0" text="Welcome!" textAlignment="CENTER">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Label layoutX="242.0" layoutY="158.0" text="Username" />
-      <TextField fx:id="tfUsername" layoutX="242.0" layoutY="187.0" prefHeight="27.0" prefWidth="195.0" promptText="Username" />
-      <Button fx:id="mLogIn" layoutX="381.0" layoutY="238.0" mnemonicParsing="false" onAction="#login" onMouseClicked="#login" text="Log In" />
+      <Label layoutX="267.0" layoutY="158.0" text="Username:" />
+      <TextField fx:id="tfUsername" layoutX="203.0" layoutY="187.0" prefHeight="27.0" prefWidth="195.0" promptText="Username" />
+      <Button fx:id="mLogIn" layoutX="272.0" layoutY="231.0" mnemonicParsing="false" onAction="#login" onMouseClicked="#login" text="Log In" />
    </children>
 </AnchorPane>

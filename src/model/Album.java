@@ -12,6 +12,8 @@ public class Album implements Serializable{
 	public String albumName;
 	public ArrayList<Photo> photoslist;
 	public int photoCount = 0;
+	public String firstDate = "No Date";
+	public String lastDate = "No Date";
 	
 	public Album(String albumName) {
 		this.albumName = albumName; 

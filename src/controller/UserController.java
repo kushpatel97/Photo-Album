@@ -9,6 +9,10 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
@@ -16,6 +20,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import javafx.scene.control.Alert.AlertType;
 import model.Album;
 import model.Superuser;
@@ -26,7 +31,7 @@ public class UserController implements LogoutController{
 	public ListView<Album> listview;
 	
 	@FXML
-	public Button mLogOff, mAddAlbum, mOpenAlbum, mRenameAlbum, mDeleteAlbum;
+	public Button mLogOff, mDisplay, mOpenAlbum, mRenameAlbum, mDeleteAlbum;
 	
 	@FXML
 	public MenuButton mSortBy;
@@ -54,15 +59,19 @@ public class UserController implements LogoutController{
 		// Listen for selection changes
 		if (albumlist.size() > 0) {
 			tfName.setText(albumlist.get(0).albumName);	
+			tNumber.setText("Number of Photos: " + albumlist.get(0).photoCount);
+			tDateSpan.setText("Date Span: " + albumlist.get(0).firstDate + " - " + albumlist.get(0).lastDate);
 		}
 		listview.getSelectionModel().selectedItemProperty().addListener( (v, oldValue, newValue) -> updateContent(newValue) );
 
 	}
 	
 	// updates 
-	public void updateContent(Album newValue) {
+	private void updateContent(Album newValue) {
 		if (newValue != null) {
 			tfName.setText(newValue.albumName);	
+			tNumber.setText("Number of Photos: " + newValue.photoCount);
+			tDateSpan.setText("Date Span: " + newValue.firstDate + " - " + newValue.lastDate);
 		}
 	}
 	
@@ -134,8 +143,13 @@ public class UserController implements LogoutController{
 		return;
 	}
 	
-	public void openAlbum() {
-		
+	public void openAlbum(ActionEvent event) throws IOException {
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/PhotoView.fxml"));
+		Parent sceneManager = (Parent) fxmlLoader.load();
+		Scene photoScene = new Scene(sceneManager);
+		Stage appStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		appStage.setScene(photoScene);
+		appStage.show();
 	}
 	public void deleteAlbum() throws IOException {
 		int index = listview.getSelectionModel().getSelectedIndex();
