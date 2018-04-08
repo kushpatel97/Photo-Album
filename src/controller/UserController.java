@@ -50,7 +50,6 @@ public class UserController implements LogoutController{
 	public static User user; // used to store current user
 	
 	public void start() {
-		System.out.println("User Page");
 		update();
 		if(!albumlist.isEmpty()) {
     		listview.getSelectionModel().select(0); //select first user
@@ -63,10 +62,9 @@ public class UserController implements LogoutController{
 			tDateSpan.setText("Date Span: " + albumlist.get(0).firstDate + " - " + albumlist.get(0).lastDate);
 		}
 		listview.getSelectionModel().selectedItemProperty().addListener( (v, oldValue, newValue) -> updateContent(newValue) );
-
 	}
 	
-	// updates 
+	// updates with listener
 	private void updateContent(Album newValue) {
 		if (newValue != null) {
 			tfName.setText(newValue.albumName);	

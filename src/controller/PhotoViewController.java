@@ -25,7 +25,7 @@ import model.Photo;
 import model.Superuser;
 import model.User;
 
-public class PhotoViewController {
+public class PhotoViewController implements LogoutController {
 	@FXML
 	public ListView<Photo> listview, displayArea;
 	
@@ -50,6 +50,11 @@ public class PhotoViewController {
 	}
 	
 	public void update() {
+	}
+	
+	public void logOut(ActionEvent event) throws IOException {
+		logMeOut(event);
+		System.out.println("Logged Out");
 	}
 
 }
