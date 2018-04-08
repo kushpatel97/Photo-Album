@@ -23,7 +23,7 @@
     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
-      <ListView fx:id="listview" maxWidth="200.0" prefHeight="200.0" prefWidth="200.0" GridPane.rowSpan="3">
+      <ListView fx:id="listview" maxWidth="261.0" prefHeight="347.0" prefWidth="261.0" GridPane.rowSpan="3">
          <GridPane.margin>
             <Insets top="40.0" />
          </GridPane.margin></ListView>
@@ -33,38 +33,29 @@
             <Button fx:id="mDeleteAlbum" layoutX="177.0" layoutY="191.0" mnemonicParsing="false" onAction="#deleteAlbum" text="Delete Album" />
             <TextField fx:id="tfName" layoutX="23.0" layoutY="100.0" prefHeight="25.0" prefWidth="219.0" promptText="Album Name" />
             <Button fx:id="mLogOff" layoutX="218.0" layoutY="1.0" mnemonicParsing="false" onAction="#logOut" text="Log Off" />
-            <Label layoutX="22.0" layoutY="76.0" text="Album Info">
+            <Label layoutX="22.0" layoutY="76.0" text="Selected Album Info:">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <Button fx:id="mAddAlbum" layoutX="202.0" layoutY="295.0" mnemonicParsing="false" onAction="#addAlbum" text="Add" />
+            <Button fx:id="mAddAlbum" layoutX="198.0" layoutY="322.0" mnemonicParsing="false" onAction="#addAlbum" text="Add" />
             <Button fx:id="mRenameAlbum" layoutX="110.0" layoutY="191.0" mnemonicParsing="false" onAction="#renameAlbum" text="Rename" />
-            <Text fx:id="tUser" layoutX="1.0" layoutY="23.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="185.99999782443047">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Text>
             <Text fx:id="tNumber" layoutX="23.0" layoutY="157.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Number of Photos:" wrappingWidth="218.99999678134918" />
             <Text fx:id="tDateSpan" layoutX="23.0" layoutY="173.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date Span:" wrappingWidth="218.99999678134918" />
-            <Label layoutX="27.0" layoutY="269.0" text="Create New Album">
+            <Label layoutX="22.0" layoutY="304.0" text="Create New Album:">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <TextField fx:id="tfNewAlbum" layoutX="24.0" layoutY="298.0" />
+            <TextField fx:id="tfNewAlbum" layoutX="23.0" layoutY="325.0" />
+            <Button layoutX="18.0" layoutY="249.0" mnemonicParsing="false" text="Sort Albums By" />
          </children>
       </AnchorPane>
-      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="List of Albums" GridPane.halignment="LEFT" GridPane.valignment="TOP">
+      <Text fx:id="tUser" strokeType="OUTSIDE" strokeWidth="0.0" text="List of Albums" GridPane.halignment="LEFT" GridPane.valignment="TOP">
          <font>
             <Font size="18.0" />
          </font>
       </Text>
-      <Button mnemonicParsing="false" text="Sort By" GridPane.halignment="CENTER" GridPane.valignment="TOP">
-         <GridPane.margin>
-            <Insets left="50.0" />
-         </GridPane.margin>
-      </Button>
    </children>
    <padding>
       <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />

@@ -45,18 +45,23 @@ public class AdminController implements LogoutController {
 		String username = tfUsername.getText().trim();
 		if(username.isEmpty() || username == null) {
 			Alert alert = new Alert(AlertType.ERROR);
-			alert.setTitle("Empty Field");
-			alert.setContentText("Please enter a username.");
+			alert.setTitle("Admin Error");
+			alert.setContentText("Empty Field: Please enter a username.");
 			alert.showAndWait();
 			return;
-		}
-		else if(adminuser.exists(username)) {
+		} else if(adminuser.exists(username)) {
 			Alert alert = new Alert(AlertType.ERROR);
-			alert.setTitle("Username already exists.");
-			alert.setContentText("Try entering a new username!");
+			alert.setTitle("Admin Error.");
+			alert.setContentText("Username already exists. Try entering a new username!");
 			alert.showAndWait();
 			return;
-		}else {
+		} else if (username.equals("admin")) {
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setTitle("Admin Error");
+			alert.setContentText("Cannot add 'admin' to Users.");
+			alert.showAndWait();
+			return;
+		} else {
 			adminuser.addUser(username);
 			update();
 			tfUsername.clear();

@@ -188,7 +188,7 @@ public class UserController implements LogoutController{
 	}
 	
 	public void update() {
-		tUser.setText("User: " + username);
+		tUser.setText(username + "'s Album List:");
 		// tfName.setText(listview.getSelectionModel().getSelectedItem());
 		user = adminuser.getUser(username);
 		
