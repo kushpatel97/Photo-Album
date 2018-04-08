@@ -20,7 +20,7 @@
       <Button fx:id="mSlideshow" layoutX="286.0" layoutY="347.0" mnemonicParsing="false" text="Slideshow" />
       <Button fx:id="mSearch" layoutX="378.0" layoutY="347.0" mnemonicParsing="false" text="Search Album" />
       <Text layoutX="282.0" layoutY="229.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Caption:" />
-      <Button fx:id="mBack" layoutX="499.0" layoutY="54.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="77.0" text="Back" />
+      <Button fx:id="mBack" layoutX="499.0" layoutY="54.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="77.0" onAction="#back" text="Back" />
       <Text layoutX="88.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Photos in Album" />
       <Text layoutX="326.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Display Area" />
    </children>

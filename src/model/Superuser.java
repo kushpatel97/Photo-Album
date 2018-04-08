@@ -21,8 +21,6 @@ public class Superuser implements Serializable {
 	public ArrayList<User> users;
 	public User current;
 	public boolean loggedIn;
-	
-	
 
 	public Superuser() {
 		users = new ArrayList<User>();

@@ -142,6 +142,7 @@ public class UserController implements LogoutController{
 	}
 	
 	public void openAlbum(ActionEvent event) throws IOException {
+		PhotoViewController.album = listview.getSelectionModel().getSelectedItem();
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/PhotoView.fxml"));
 		Parent sceneManager = (Parent) fxmlLoader.load();
 		Scene photoScene = new Scene(sceneManager);

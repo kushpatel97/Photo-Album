@@ -41,7 +41,6 @@ public class LoginController {
 			adminController.start();
 			appStage.setScene(adminScene);
 			appStage.show();
-			System.out.println("Clicked Me");
 		}
 		else if (isUser(username)) {
 			UserController.username = username;
@@ -53,7 +52,6 @@ public class LoginController {
 			userController.start();
 			appStage.setScene(userScene);
 			appStage.show();
-			System.out.println("Clicked Me");
 		}
 		else if (username.isEmpty() || username == null) {
 			System.out.print("Empty String");
