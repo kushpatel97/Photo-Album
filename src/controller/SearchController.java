@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Optional;
 
@@ -22,6 +23,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import model.Photo;
 import model.Tag;
 
 public class SearchController implements LogoutController {
@@ -47,8 +49,50 @@ public class SearchController implements LogoutController {
 	public ArrayList<String> tagdisplay = new ArrayList<String>();
 	public ObservableList<String> obsTag;
 	
+	//Storing photos
+	public ArrayList<Photo> photolist = new ArrayList<Photo>();
+	
 	public void start() {
 		System.out.println("At start");
+		
+	}
+	
+	public void searchByDate(ActionEvent event) throws IOException {
+		LocalDate from = dFrom.getValue();
+		LocalDate to = dTo.getValue();
+		
+		if(from == null || to == null) {
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setTitle("Error Dialog");
+			alert.setHeaderText("Pleas fill in the date fields!");
+			alert.setContentText("Dates cannot be left blank!");
+			Optional<ButtonType> buttonClicked=alert.showAndWait();
+			if (buttonClicked.get()==ButtonType.OK) {
+				alert.close();
+			}
+		   else {
+			   alert.close();
+		   }
+			return;
+		}
+		
+		if(to.isBefore(from)) {
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setTitle("Error Dialog");
+			alert.setHeaderText("Invalid Date Range");
+			alert.setContentText("The From date should be before the To date.");
+
+			Optional<ButtonType> buttonClicked=alert.showAndWait();
+			if (buttonClicked.get()==ButtonType.OK) {
+				alert.close();
+			}
+			else {
+			   alert.close();
+			}
+			return;
+		}
+		
+		
 		
 	}
 	

@@ -78,6 +78,25 @@ public class User implements Serializable{
 		this.currentAlbum = currentAlbum;
 	}
 	
+	public ArrayList<Photo> getTaggedPhotos(ArrayList<Tag> taggedlist){
+		ArrayList<Photo> photolist = new ArrayList<Photo>();
+		//Used to make sure no duplicates
+		HashSet<Photo> check = new HashSet<Photo>();
+		for(Tag tag : taggedlist) {
+			for(Album album : albums) {
+				for(Photo photo : album.getPhotos()) {
+					if(photo.tagExists(tag.name, tag.value)) {
+						check.add(photo);
+					}
+				}
+				
+			}
+		}
+		photolist.addAll(check);
+		return photolist;
+		
+	}
+	
 	public static void save(User pdApp) throws IOException {
 		ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(storeDir + File.separator + storeFile));
 		oos.writeObject(pdApp);

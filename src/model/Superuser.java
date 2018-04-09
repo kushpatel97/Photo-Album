@@ -25,8 +25,8 @@ public class Superuser implements Serializable {
 	public Superuser() {
 		users = new ArrayList<User>();
 		users.add(new User("admin"));
-		current = null;
-		loggedIn = false;
+		this.current = null;
+		this.loggedIn = false;
 	}
 	
 	

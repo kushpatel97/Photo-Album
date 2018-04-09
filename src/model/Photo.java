@@ -17,6 +17,35 @@ public class Photo implements Serializable {
 	public Photo(File pic, String photoname) {
 		this.photoname = photoname; 
 		this.pic = pic;
+		this.taglist = new ArrayList<Tag>();
+	}
+	
+	
+	public void addTag(String name, String value) {
+		taglist.add(new Tag(name,value));
+	}
+	public void removeTag(String name, String value) {
+		for(int i = 0; i < taglist.size(); i++) {
+			Tag cur = taglist.get(i);
+			if(cur.name.toLowerCase().equals(name.toLowerCase()) && cur.value.toLowerCase().equals(value.toLowerCase())) {
+				taglist.remove(i);
+			}
+		}
+		
+	}
+	public boolean tagExists(String name, String value) {
+		for(int i = 0; i < taglist.size(); i++) {
+			Tag cur = taglist.get(i);
+			if(cur.name.toLowerCase().equals(name.toLowerCase()) && cur.value.toLowerCase().equals(value.toLowerCase())) {
+				return true;
+			}
+		}
+		return false;
+		
+	}
+	
+	public ArrayList<Tag> getTagList(){
+		return taglist;
 	}
 	
 	public void setFilePath(String fp) {
