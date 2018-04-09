@@ -28,10 +28,12 @@ public class Album implements Serializable{
 		photoslist = new ArrayList<Photo>();
 	}
 	
-	public boolean exists(Photo photo) {
-		for(Photo photos : photoslist) {
-			if(photos.getName().equals(photo)) {
-				return true;
+	public boolean exists(String fp) {
+		if (photoslist.size() > 0 && !fp.isEmpty()) {
+			for(Photo photos : photoslist) {
+				if(photos.getFilePath().equals(fp)) {
+					return true;
+				}
 			}
 		}
 		return false;

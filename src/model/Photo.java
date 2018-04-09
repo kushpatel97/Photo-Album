@@ -12,10 +12,19 @@ public class Photo implements Serializable {
 	public ArrayList<Tag> taglist;
 	public String caption;
 	public String date = "No Date";
+	public String filepath;
 	
 	public Photo(File pic, String photoname) {
 		this.photoname = photoname; 
 		this.pic = pic;
+	}
+	
+	public void setFilePath(String fp) {
+		this.filepath = fp;
+	}
+	
+	public String getFilePath() {
+		return filepath;
 	}
 	
 	public void setPic(File pic) {

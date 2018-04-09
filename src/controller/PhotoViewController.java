@@ -1,8 +1,6 @@
 package controller;
 
-import java.awt.Image;
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Optional;
 
@@ -20,8 +18,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.control.Alert.AlertType;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import model.Album;
 import model.Photo;
@@ -41,7 +41,7 @@ public class PhotoViewController implements LogoutController {
 	
 	@FXML
 	public TextField tfCaption;
-	
+
 	public static ArrayList<Photo> photolist = new ArrayList<>();
 	public ObservableList<Photo> observableList;	
 	public static Superuser adminuser = Main.driver;
@@ -58,33 +58,33 @@ public class PhotoViewController implements LogoutController {
 	public void display() {
 		Photo photo = listview.getSelectionModel().getSelectedItem();
 		File file = photo.getPic();
-		
-		//displayArea.setImage(file);
+		Image image = new Image(file.toURI().toString());
+		displayArea.setImage(image);
 	}
 	
 	public void addPhoto() throws IOException {
-		String photoname = tfCaption.getText().trim();
-		File file = new File("/usr/Alex/Documents/monalisa.jpeg");
-		Photo photo = new Photo(file, photoname);
+		FileChooser filechooser = new FileChooser();
+		FileChooser.ExtensionFilter extFilterJPG = new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg", "*.gif");
+		filechooser.getExtensionFilters().add(extFilterJPG);
+		File imgfile = filechooser.showOpenDialog(null);
 		
-		if(photoname.isEmpty() || photoname == null) {
-			Alert alert = new Alert(AlertType.ERROR);
-			alert.setTitle("Empty Field");
-			alert.setContentText("Please enter an album name.");
-			alert.showAndWait();
+		if (imgfile == null) {
 			return;
-		} else if(album.exists(photo)) {
+		} /*else if (album.exists(imgfile.getAbsolutePath())) {
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setTitle("Photo already exists.");
 			alert.setContentText("Try entering a new photo!");
 			alert.showAndWait();
 			return;
-		}else {
-			album.addPhoto(photo);
-			update();
-			tfCaption.clear();
+		}*/ else {
+			String filepath = imgfile.getAbsolutePath();
+			Photo newPhoto = new Photo(imgfile, filepath);
+			album.addPhoto(newPhoto);
+			update();	
 		}
-		Album.save(album);	
+		
+		Album.save(album);
+		
 	}
 	
 	public void deletePhoto() throws IOException {
@@ -98,7 +98,6 @@ public class PhotoViewController implements LogoutController {
 		if (result.get() == ButtonType.OK) {
 			album.deletePhoto(index);
 			update();
-			Album.save(album);
 			   
 			if (album.getPhotos().size() == 0) {
 				mDelete.setVisible(false);
@@ -112,6 +111,8 @@ public class PhotoViewController implements LogoutController {
 					listview.getSelectionModel().select(index);
 				}
 			}
+			
+			Album.save(album);
 		} else {
 			return;
 		}
