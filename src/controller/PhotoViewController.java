@@ -1,5 +1,7 @@
 package controller;
 
+import java.awt.Image;
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Optional;
@@ -18,6 +20,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 import model.Album;
@@ -27,7 +30,11 @@ import model.User;
 
 public class PhotoViewController implements LogoutController {
 	@FXML
-	public ListView<Photo> listview, displayArea;
+	public ListView<Photo> listview;
+	
+	@FXML
+	public ImageView displayArea;
+	private Image image;
 	
 	@FXML
 	public Button mLogOff, mBack, mCaption, mAdd, mDelete, mSlideshow, mSearch, mDisplay;
@@ -48,9 +55,17 @@ public class PhotoViewController implements LogoutController {
 		}
 	}
 	
+	public void display() {
+		Photo photo = listview.getSelectionModel().getSelectedItem();
+		File file = photo.getPic();
+		
+		//displayArea.setImage(file);
+	}
+	
 	public void addPhoto() throws IOException {
 		String photoname = tfCaption.getText().trim();
-		Photo photo = new Photo(photoname);
+		File file = new File("/usr/Alex/Documents/monalisa.jpeg");
+		Photo photo = new Photo(file, photoname);
 		
 		if(photoname.isEmpty() || photoname == null) {
 			Alert alert = new Alert(AlertType.ERROR);

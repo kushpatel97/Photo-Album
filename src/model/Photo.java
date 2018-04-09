@@ -1,5 +1,6 @@
 package model;
 
+import java.io.File;
 import java.io.Serializable;
 import java.util.*;
 
@@ -7,12 +8,22 @@ public class Photo implements Serializable {
 	private static final long serialVersionUID = 1L;
 	// public Image image;
 	public String photoname;
+	public File pic;
 	public ArrayList<Tag> taglist;
 	public String caption;
 	public String date = "No Date";
 	
-	public Photo(String photoname) {
+	public Photo(File pic, String photoname) {
 		this.photoname = photoname; 
+		this.pic = pic;
+	}
+	
+	public void setPic(File pic) {
+		this.pic = pic;
+	}
+	
+	public File getPic() {
+		return this.pic;
 	}
 	
 	public String getCaption() {
