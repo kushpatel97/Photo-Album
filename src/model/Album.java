@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class Album implements Serializable{
@@ -38,6 +39,7 @@ public class Album implements Serializable{
 	}
 	
 	public String getFirstDate() {
+		SimpleDateFormat dateFormatter = new SimpleDateFormat("E, M-d-y 'at' h:m:s a");
 		Date date = null; 
 		String dateStr = "No Date";
 		if (!photoslist.isEmpty()) {
@@ -47,13 +49,14 @@ public class Album implements Serializable{
 					date = photo.date;
 				}
 			}
-			dateStr = date.toString();
+			dateStr = dateFormatter.format(date);
 		}
 		
 		return dateStr;
 	}
 	
 	public String getLastDate() {
+		SimpleDateFormat dateFormatter = new SimpleDateFormat("E, M-d-y 'at' h:m:s a");
 		Date date = null; 
 		String dateStr = "No Date";
 		if (!photoslist.isEmpty()) {
@@ -63,7 +66,7 @@ public class Album implements Serializable{
 					date = photo.date;
 				}
 			}
-			dateStr = date.toString();
+			dateStr = dateFormatter.format(date);
 		}
 		
 		return dateStr;
