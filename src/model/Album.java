@@ -20,8 +20,6 @@ public class Album implements Serializable{
 	public String albumName;
 	public ArrayList<Photo> photoslist;
 	public int photoCount = 0;
-	public String firstDate = "No Date";
-	public String lastDate = "No Date";
 	
 	public Album(String albumName) {
 		this.albumName = albumName; 
@@ -37,6 +35,38 @@ public class Album implements Serializable{
 			}
 		}
 		return false;
+	}
+	
+	public String getFirstDate() {
+		Date date = null; 
+		String dateStr = "No Date";
+		if (!photoslist.isEmpty()) {
+			date = this.getPhotos().get(0).date;
+			for (Photo photo: photoslist) {
+				if (photo.date.before(date)) {
+					date = photo.date;
+				}
+			}
+			dateStr = date.toString();
+		}
+		
+		return dateStr;
+	}
+	
+	public String getLastDate() {
+		Date date = null; 
+		String dateStr = "No Date";
+		if (!photoslist.isEmpty()) {
+			date = this.getPhotos().get(0).date;
+			for (Photo photo: photoslist) {
+				if (photo.date.after(date)) {
+					date = photo.date;
+				}
+			}
+			dateStr = date.toString();
+		}
+		
+		return dateStr;
 	}
 	
 	public String getName() {
