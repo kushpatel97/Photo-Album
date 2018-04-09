@@ -54,7 +54,7 @@ public class UserController implements LogoutController{
 		if(!albumlist.isEmpty()) {
     		listview.getSelectionModel().select(0); //select first user
 		}
-		
+	
 		// Listen for selection changes
 		if (albumlist.size() > 0) {
 			tfName.setText(albumlist.get(0).albumName);	
@@ -70,6 +70,14 @@ public class UserController implements LogoutController{
 			tfName.setText(newValue.albumName);	
 			tNumber.setText("Number of Photos: " + newValue.photoCount);
 			tDateSpan.setText("Date Span: " + newValue.firstDate + " - " + newValue.lastDate);
+		}
+	}
+	
+	public void updateContentBack() {
+		if (albumlist.size() > 0) {
+			Album alb = listview.getSelectionModel().getSelectedItem();
+			tNumber.setText("Number of Photos: " + alb.photoCount);
+			tDateSpan.setText("Date Span: " + alb.firstDate + " - " + alb.lastDate);
 		}
 	}
 	
@@ -143,13 +151,17 @@ public class UserController implements LogoutController{
 	
 	public void openAlbum(ActionEvent event) throws IOException {
 		PhotoViewController.album = listview.getSelectionModel().getSelectedItem();
+		
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/PhotoView.fxml"));
 		Parent sceneManager = (Parent) fxmlLoader.load();
-		Scene photoScene = new Scene(sceneManager);
+		PhotoViewController photoController = fxmlLoader.getController();
+		Scene adminScene = new Scene(sceneManager);
 		Stage appStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-		appStage.setScene(photoScene);
+		photoController.start();
+		appStage.setScene(adminScene);
 		appStage.show();
 	}
+	
 	public void deleteAlbum() throws IOException {
 		int index = listview.getSelectionModel().getSelectedIndex();
 		Alert alert = new Alert(AlertType.CONFIRMATION);

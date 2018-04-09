@@ -50,6 +50,11 @@ public class Album implements Serializable{
 		photoCount++;
 	}
 	
+	public void deletePhoto(int index) {
+		photoslist.remove(index);
+		photoCount--;
+	}
+	
 	public ArrayList<Photo> getPhotos() {
 		return photoslist;
 	}

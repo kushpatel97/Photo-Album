@@ -46,7 +46,6 @@ public class PhotoViewController implements LogoutController {
 		if(!photolist.isEmpty()) {
     		listview.getSelectionModel().select(0); //select first user
 		}
-
 	}
 	
 	public void addPhoto() throws IOException {
@@ -73,14 +72,43 @@ public class PhotoViewController implements LogoutController {
 		Album.save(album);	
 	}
 	
+	public void deletePhoto() throws IOException {
+		int index = listview.getSelectionModel().getSelectedIndex();
+		Alert alert = new Alert(AlertType.CONFIRMATION);
+		alert.setTitle("Confirm Delete");
+		alert.setHeaderText(null);
+		alert.setContentText("Are you sure you want to delete this photo?");
+
+		Optional<ButtonType> result = alert.showAndWait();
+		if (result.get() == ButtonType.OK) {
+			album.deletePhoto(index);
+			update();
+			Album.save(album);
+			   
+			if (album.getPhotos().size() == 0) {
+				mDelete.setVisible(false);
+		    } else {
+		    	int lastuserindex = album.getPhotos().size();
+				if (album.getPhotos().size() == 1) {
+					listview.getSelectionModel().select(0);
+				} else if (index == lastuserindex) {
+					listview.getSelectionModel().select(lastuserindex-1);
+				} else { 
+					listview.getSelectionModel().select(index);
+				}
+			}
+		} else {
+			return;
+		}
+		return;
+	}
+	
 	public void update() {
 		photolist.clear();
 		for (int i = 0; i < album.getPhotos().size(); i++) {
 			photolist.add(album.getPhotos().get(i));
 		}
-		if (album.getPhotos().size() == 0) {
-			System.out.println("hh");
-		}
+
 		observableList = FXCollections.observableArrayList(photolist);
 		listview.setItems(observableList);
 		listview.refresh();

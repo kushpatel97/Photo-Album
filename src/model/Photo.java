@@ -25,6 +25,6 @@ public class Photo implements Serializable {
 	
 	@Override
 	public String toString() {
-		return getCaption();
+		return getName();
 	}
 }
