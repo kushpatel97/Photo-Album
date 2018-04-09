@@ -49,6 +49,7 @@
             </Label>
             <TextField fx:id="tfNewAlbum" layoutX="23.0" layoutY="325.0" />
             <Button layoutX="18.0" layoutY="249.0" mnemonicParsing="false" text="Sort Albums By" />
+            <Button fx:id="mSearch" layoutX="150.0" layoutY="249.0" mnemonicParsing="false" onAction="#search" prefHeight="27.0" prefWidth="112.0" text="Search" />
          </children>
       </AnchorPane>
       <Text fx:id="tUser" strokeType="OUTSIDE" strokeWidth="0.0" text="List of Albums" GridPane.halignment="LEFT" GridPane.valignment="TOP">

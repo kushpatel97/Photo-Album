@@ -29,10 +29,10 @@
           <MenuItem mnemonicParsing="false" text="Name" />
         </items>
       </MenuButton>
-      <Button fx:id="mAddAlbum" layoutX="300.0" layoutY="258.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="97.0" text="Add Album" />
-      <Button layoutX="453.0" layoutY="258.0" mnemonicParsing="false" onAction="#renameAlbum" text="Rename Album" />
-      <Button fx:id="mOpenAlbum" layoutX="300.0" layoutY="323.0" mnemonicParsing="false" onAction="#openAlbum" prefHeight="25.0" prefWidth="97.0" text="Open Album" />
-      <Button fx:id="mDeleteAlbum" layoutX="453.0" layoutY="323.0" mnemonicParsing="false" onAction="#deleteAlbum" prefHeight="25.0" prefWidth="97.0" text="Delete Album" />
+      <Button fx:id="mAddAlbum" layoutX="266.0" layoutY="258.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="97.0" text="Add Album" />
+      <Button layoutX="391.0" layoutY="258.0" mnemonicParsing="false" onAction="#renameAlbum" text="Rename Album" />
+      <Button fx:id="mOpenAlbum" layoutX="266.0" layoutY="310.0" mnemonicParsing="false" onAction="#openAlbum" prefHeight="25.0" prefWidth="97.0" text="Open Album" />
+      <Button fx:id="mDeleteAlbum" layoutX="398.0" layoutY="310.0" mnemonicParsing="false" onAction="#deleteAlbum" prefHeight="25.0" prefWidth="97.0" text="Delete Album" />
       <GridPane hgap="10.0" layoutX="249.0" layoutY="56.0" prefHeight="172.0" prefWidth="329.0" vgap="10.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -60,5 +60,6 @@
          </padding>
       </GridPane>
       <Button fx:id="mLogOff" layoutX="525.0" layoutY="11.0" mnemonicParsing="false" onAction="#logOut" text="Log Off" />
+      <Button fx:id="mSearch" layoutX="369.0" layoutY="11.0" mnemonicParsing="false" onAction="#search" text="Search" />
    </children>
 </AnchorPane>

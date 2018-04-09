@@ -31,7 +31,7 @@ public class UserController implements LogoutController{
 	public ListView<Album> listview;
 	
 	@FXML
-	public Button mLogOff, mDisplay, mOpenAlbum, mRenameAlbum, mDeleteAlbum;
+	public Button mLogOff, mDisplay, mOpenAlbum, mRenameAlbum, mDeleteAlbum, mSearch, mAddAlbum;
 	
 	@FXML
 	public MenuButton mSortBy;
@@ -191,6 +191,19 @@ public class UserController implements LogoutController{
 			return;
 		}
 		return;
+	}
+	
+	
+	public void search(ActionEvent event) throws IOException {
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/Search.fxml"));
+		Parent sceneManager = (Parent) fxmlLoader.load();
+		SearchController searchController = fxmlLoader.getController();
+		Scene adminScene = new Scene(sceneManager);
+		Stage appStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		searchController.start();
+		appStage.setScene(adminScene);
+		appStage.show();
+		
 	}
 	
 	public void logOut(ActionEvent event) throws IOException {
