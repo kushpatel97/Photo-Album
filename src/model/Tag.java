@@ -1,11 +1,12 @@
 package model;
 
 public class Tag {
-	public Photo photo;
-	public String tagline;
+	public String name;
+	public String value;
 	
-	public Tag(String tagline) {
-		this.tagline = tagline;
+	public Tag(String name, String value) {
+		this.name = name;
+		this.value = value;
 	}
 	
 	// more functions
