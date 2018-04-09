@@ -18,7 +18,7 @@
       <Button fx:id="mAdd" layoutX="285.0" layoutY="304.0" mnemonicParsing="false" onAction="#addPhoto" text="Add Photo" />
       <Button fx:id="mDelete" layoutX="382.0" layoutY="304.0" mnemonicParsing="false" onAction="#deletePhoto" text="Delete Photo" />
       <Button fx:id="mSlideshow" layoutX="286.0" layoutY="347.0" mnemonicParsing="false" text="Slideshow" />
-      <Button fx:id="mSearch" layoutX="378.0" layoutY="347.0" mnemonicParsing="false" text="Search Album" />
+      <Button fx:id="mSearch" layoutX="378.0" layoutY="347.0" mnemonicParsing="false" onAction="#search" text="Search" />
       <Text layoutX="282.0" layoutY="229.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Caption:" />
       <Button fx:id="mBack" layoutX="499.0" layoutY="54.0" mnemonicParsing="false" onAction="#back" prefHeight="32.0" prefWidth="77.0" text="Back" />
       <Text layoutX="88.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Photos in Album" />

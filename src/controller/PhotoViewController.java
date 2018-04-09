@@ -119,6 +119,8 @@ public class PhotoViewController implements LogoutController {
 		return;
 	}
 	
+	
+	
 	public void update() {
 		photolist.clear();
 		for (int i = 0; i < album.getPhotos().size(); i++) {
@@ -128,6 +130,11 @@ public class PhotoViewController implements LogoutController {
 		observableList = FXCollections.observableArrayList(photolist);
 		listview.setItems(observableList);
 		listview.refresh();
+	}
+	
+	
+	public void search(ActionEvent event) throws IOException {
+		
 	}
 	
 	public void back(ActionEvent event) throws IOException {
