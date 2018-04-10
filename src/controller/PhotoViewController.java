@@ -192,6 +192,32 @@ public class PhotoViewController implements LogoutController {
 		
 	}
 	
+	public void slideshow(ActionEvent event) throws IOException {
+		if (photolist.size() == 0) {
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setTitle("Slideshow Error");
+			alert.setHeaderText("No Photos to Display.");
+			alert.showAndWait();
+			Optional<ButtonType> buttonClicked=alert.showAndWait();
+			if (buttonClicked.get()==ButtonType.OK) {
+				alert.close();
+			}
+			else {
+				alert.close();
+			}
+		} else {
+			SlideshowController.album = photolist;
+			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/Slideshow.fxml"));
+			Parent sceneManager = (Parent) fxmlLoader.load();
+			SlideshowController slideshowController = fxmlLoader.getController();
+			Scene adminScene = new Scene(sceneManager);
+			Stage appStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+			slideshowController.start();
+			appStage.setScene(adminScene);
+			appStage.show();		
+		}
+	}
+	
 	
 	
 	public void back(ActionEvent event) throws IOException {

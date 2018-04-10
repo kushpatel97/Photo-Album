@@ -108,10 +108,10 @@ public class SinglePhotoController implements LogoutController {
 	public void back(ActionEvent event) throws IOException {
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/PhotoView.fxml"));
 		Parent sceneManager = (Parent) fxmlLoader.load();
-		PhotoViewController userController = fxmlLoader.getController();
+		PhotoViewController photoViewController = fxmlLoader.getController();
 		Scene adminScene = new Scene(sceneManager);
 		Stage appStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-		userController.start();
+		photoViewController.start();
 		appStage.setScene(adminScene);
 		appStage.show();
 	}

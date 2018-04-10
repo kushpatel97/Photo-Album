@@ -16,7 +16,7 @@
       <TextField fx:id="tfCaption" layoutX="341.0" layoutY="204.0" prefHeight="26.0" prefWidth="195.0" />
       <Button fx:id="mAdd" layoutX="282.0" layoutY="253.0" mnemonicParsing="false" onAction="#addPhoto" text="Add Photo" />
       <Button fx:id="mDelete" layoutX="282.0" layoutY="295.0" mnemonicParsing="false" onAction="#deletePhoto" text="Delete Photo" />
-      <Button fx:id="mSlideshow" layoutX="184.0" layoutY="347.0" mnemonicParsing="false" text="Slideshow" />
+      <Button fx:id="mSlideshow" layoutX="184.0" layoutY="347.0" mnemonicParsing="false" onAction="#slideshow" text="Slideshow" />
       <Text layoutX="282.0" layoutY="229.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Caption:" />
       <Button fx:id="mBack" layoutX="499.0" layoutY="54.0" mnemonicParsing="false" onAction="#back" prefHeight="32.0" prefWidth="77.0" text="Back" />
       <Text layoutX="88.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Photos in Album" />

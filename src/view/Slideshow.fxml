@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9.0.4" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.SlideshowController">
+   <children>
+      <Button fx:id="mForward" layoutX="564.0" layoutY="208.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="36.0" onAction="#forward" text="-&gt;" />
+      <Text layoutX="269.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Slideshow" />
+      <ImageView fx:id="displayArea" fitHeight="332.0" fitWidth="495.0" layoutX="53.0" layoutY="58.0" pickOnBounds="true" preserveRatio="true" />
+      <Button fx:id="mBackward" layoutY="208.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="36.0" onAction="#backward" text="&lt;-" />
+      <Button fx:id="mLogOff" layoutX="513.0" layoutY="15.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="69.0" onAction="#logOut" text="Log Off" />
+      <Button fx:id="mBack" layoutX="434.0" layoutY="15.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="62.0" onAction="#back" text="Back" />
+   </children>
+   <padding>
+      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+   </padding>
+</AnchorPane>
