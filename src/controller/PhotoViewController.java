@@ -60,7 +60,7 @@ public class PhotoViewController implements LogoutController {
 		}
 		listview.getSelectionModel().selectedItemProperty().addListener( (v, oldValue, newValue) -> {
 			displayThumbnail();
-			updateCaption(newValue);
+			updateCaption();
 		});
 	}
 	
@@ -71,13 +71,18 @@ public class PhotoViewController implements LogoutController {
 			file = photo.getPic();
 			Image image = new Image(file.toURI().toString());
 			displayArea.setImage(image);
+		} else {
+			displayArea.setImage(null);
 		}
 		return;
 	}
 	
-	public void updateCaption(Photo photo) {
-		if (photo.getCaption() != "") {
+	public void updateCaption() {
+		Photo photo = listview.getSelectionModel().getSelectedItem();
+		if (photolist.size() > 0 && photo != null) {
 			tfCaption.setText(photo.caption);
+		} else {
+			tfCaption.setText(null);
 		}
 	}
 	
