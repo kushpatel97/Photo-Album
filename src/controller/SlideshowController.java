@@ -112,7 +112,7 @@ public class SlideshowController implements LogoutController {
 		PhotoViewController photoViewController = fxmlLoader.getController();
 		Scene adminScene = new Scene(sceneManager);
 		Stage appStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-		photoViewController.start();
+		photoViewController.start(appStage);
 		appStage.setScene(adminScene);
 		appStage.show();
 	}

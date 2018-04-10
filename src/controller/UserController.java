@@ -50,8 +50,10 @@ public class UserController implements LogoutController{
 	public static Superuser adminuser = Main.driver;
 	public static User user; // used to store current user
 	
-	public void start() {
+	public void start(Stage app_stage) {
 		update();
+		
+		app_stage.setTitle(adminuser.getCurrent().getUsername() + " Collection of Photo's");
 		if(!albumlist.isEmpty()) {
     		listview.getSelectionModel().select(0); //select first user
 		}
@@ -202,12 +204,20 @@ public class UserController implements LogoutController{
 		PhotoViewController.album = listview.getSelectionModel().getSelectedItem();
 		PhotoViewController.albumlist = albumlist;
 		
+		//Changed
+		int albumindex = listview.getSelectionModel().getSelectedIndex();
+		int currentuserindex = adminuser.getUserIndex();
+		Album album = adminuser.getUsers().get(currentuserindex).getAlbums().get(albumindex);
+		
+		adminuser.getUsers().get(currentuserindex).setCurrentAlbum(album);
+		//End Change
+		
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/PhotoView.fxml"));
 		Parent sceneManager = (Parent) fxmlLoader.load();
 		PhotoViewController photoController = fxmlLoader.getController();
 		Scene adminScene = new Scene(sceneManager);
 		Stage appStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-		photoController.start();
+		photoController.start(appStage);
 		appStage.setScene(adminScene);
 		appStage.show();
 	}

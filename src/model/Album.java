@@ -120,6 +120,17 @@ public class Album implements Serializable{
 		return dateStr;
 	}
 	
+	
+	
+	
+	public String getAlbumName() {
+		return albumName;
+	}
+
+	public void setAlbumName(String albumName) {
+		this.albumName = albumName;
+	}
+
 	public String getName() {
 		return this.albumName;
 	}

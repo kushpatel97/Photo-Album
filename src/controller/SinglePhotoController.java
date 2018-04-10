@@ -41,12 +41,18 @@ public class SinglePhotoController implements LogoutController {
 	@FXML
 	public TextField tfCaption, tfTagName, tfTagValue;
 
+	
+	public static Superuser adminuser = Main.driver;
 	public static ArrayList<Tag> taglist = new ArrayList<>();
 	public ObservableList<Tag> observableList;	
 	public static Photo photo; // used to store current photo
 	
 	
-	public void start() {
+	public void start(Stage app_stage) {
+		//See if at current photo by caption
+		app_stage.setTitle(adminuser.getCurrent().getCurrentAlbum().getCurrentPhoto().getCaption() + " ");
+		
+		//End changes
 		System.out.println("At single photo");
 		update();
 		if(!taglist.isEmpty()) {
@@ -119,7 +125,7 @@ public class SinglePhotoController implements LogoutController {
 		PhotoViewController photoViewController = fxmlLoader.getController();
 		Scene adminScene = new Scene(sceneManager);
 		Stage appStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-		photoViewController.start();
+		photoViewController.start(appStage);
 		appStage.setScene(adminScene);
 		appStage.show();
 	}

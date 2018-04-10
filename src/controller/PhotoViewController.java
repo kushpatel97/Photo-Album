@@ -53,7 +53,9 @@ public class PhotoViewController implements LogoutController {
 	public static ArrayList<Album> albumlist; // for move/copy
 	public static Album album; // used to store current user
 	
-	public void start() {
+	public void start(Stage app_stage) {
+		
+		app_stage.setTitle(adminuser.getCurrent().getCurrentAlbum().getAlbumName() + " Album Page");
 		displayArea.setFitHeight(100);
 		displayArea.setFitWidth(100);
 		displayArea.setPreserveRatio(false);
@@ -282,13 +284,19 @@ public class PhotoViewController implements LogoutController {
 			}
 			
 			if (checked) {
+				//Changed
+				int photoindex = listview.getSelectionModel().getSelectedIndex();
+				Photo currentphoto = adminuser.getCurrent().getCurrentAlbum().getPhotos().get(photoindex);
+				adminuser.getCurrent().getCurrentAlbum().setCurrentPhoto(currentphoto);
+				//End Changed
+				
 				SinglePhotoController.photo = listview.getSelectionModel().getSelectedItem();
 				FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/SinglePhoto.fxml"));
 				Parent sceneManager = (Parent) fxmlLoader.load();
 				SinglePhotoController singlePhotoController = fxmlLoader.getController();
 				Scene adminScene = new Scene(sceneManager);
 				Stage appStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-				singlePhotoController.start();
+				singlePhotoController.start(appStage);
 				appStage.setScene(adminScene);
 				appStage.show();	
 			}
@@ -330,7 +338,7 @@ public class PhotoViewController implements LogoutController {
 		UserController userController = fxmlLoader.getController();
 		Scene adminScene = new Scene(sceneManager);
 		Stage appStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-		userController.start();
+		userController.start(appStage);
 		appStage.setScene(adminScene);
 		appStage.show();
 	}

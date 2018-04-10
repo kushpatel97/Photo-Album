@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Optional;
 
 import application.Main;
@@ -13,7 +14,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
+import model.Album;
 import model.Superuser;
+import model.User;
 
 public class LoginController {
 	
@@ -42,14 +45,18 @@ public class LoginController {
 			appStage.setScene(adminScene);
 			appStage.show();
 		}
-		else if (isUser(username)) {
+		else if (driver.checkUser(username)) {
+			//Changed
+			User currentUser = driver.getCurrent();
+			ArrayList<Album> useralbums = currentUser.getAlbums();
+			
 			UserController.username = username;
 			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/User.fxml"));
 			Parent sceneManager = (Parent) fxmlLoader.load();
 			UserController userController = fxmlLoader.getController();
 			Scene userScene = new Scene(sceneManager);
 			Stage appStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-			userController.start();
+			userController.start(appStage);
 			appStage.setScene(userScene);
 			appStage.show();
 		}

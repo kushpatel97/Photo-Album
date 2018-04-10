@@ -240,7 +240,7 @@ public class SearchController implements LogoutController {
 		UserController userController = fxmlLoader.getController();
 		Scene adminScene = new Scene(sceneManager);
 		Stage appStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-		userController.start();
+		userController.start(appStage);
 		appStage.setScene(adminScene);
 		appStage.show();
 	}

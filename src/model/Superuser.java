@@ -9,6 +9,8 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.*;
 
+import application.Main;
+
 public class Superuser implements Serializable {
 	
 	/**
@@ -51,6 +53,34 @@ public class Superuser implements Serializable {
 			}
 		}
 		return false;
+	}
+	
+	public boolean checkUser(String user) {
+		int index = 0;
+		for(int i = 0; i < users.size(); i++) {
+			if(users.get(i).getUsername().equals(user)) {
+				index = i;
+			}
+		}
+		
+		if(index == -1) {
+			return false;
+		}
+		this.setCurrent(users.get(index));
+		this.loggedIn = true;
+		return true;
+		
+	}
+	
+	public int getUserIndex() {
+		int index = 0;
+		for(User user : users) {
+			if(user.getUsername().equals(Main.driver.getCurrent().getUsername())) {
+				return index;
+			}
+			index++;
+		}
+		return -1;
 	}
 	
 	public ArrayList<User> getUsers(){
