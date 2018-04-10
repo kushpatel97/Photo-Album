@@ -96,13 +96,13 @@ public class User implements Serializable{
 		photolist.addAll(check);
 		return photolist;
 	}
+	
 	/**
 	 * Compares dates and returns a list of photos within the dated range
 	 * @param fromDate start date
 	 * @param toDate end date
 	 * @return An ArrayList of type photo containing the list of photos within a certain range
 	 */
-	
 	public ArrayList<Photo> getPhotosInRange(LocalDate fromDate, LocalDate toDate){
 		ArrayList<Photo> inrange = new ArrayList<Photo>();
 		Calendar from = Calendar.getInstance();
@@ -113,6 +113,19 @@ public class User implements Serializable{
 		
 		for(Album album : albums) {
 			for(Photo photo : album.getPhotos()) {
+				Date date = photo.getDate();
+				Calendar pDate = Calendar.getInstance();
+				pDate.setTime(date);
+				Calendar today = Calendar.getInstance();
+				
+				int year = pDate.get(Calendar.YEAR);
+				int month = pDate.get(Calendar.MONTH);
+				int dateOfMonth = pDate.get(Calendar.DAY_OF_MONTH);
+				
+				today.set(year, month, dateOfMonth);
+				if((today.compareTo(from) > 0 && today.compareTo(to) < 0) || today.equals(from) || today.equals(to)) {
+					inrange.add(photo);
+				}
 				
 			}
 		}
