@@ -93,6 +93,27 @@ public class SearchController implements LogoutController {
 		}
 		
 		
+	}
+	
+	public void searchByTags(ActionEvent event) throws IOException{
+		if(taglist.isEmpty() || taglist == null) {
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setTitle("Error Dialog");
+			alert.setHeaderText("Please add a tag to the list before you search for it!");
+			alert.setContentText("List of tags is empty!");
+
+			Optional<ButtonType> buttonClicked=alert.showAndWait();
+			if (buttonClicked.get()==ButtonType.OK) {
+				alert.close();
+			}
+			else {
+			   alert.close();
+			}
+			return;	
+		}
+		this.photolist = Main.driver.getCurrent().getTaggedPhotos(taglist);
+		
+		// Need to use this list to display pictures some how
 		
 	}
 	

@@ -38,6 +38,7 @@ public class Photo implements Serializable {
 	public void addTag(String name, String value) {
 		taglist.add(new Tag(name,value));
 	}
+	
 	public void removeTag(String name, String value) {
 		for(int i = 0; i < taglist.size(); i++) {
 			Tag cur = taglist.get(i);
@@ -45,8 +46,8 @@ public class Photo implements Serializable {
 				taglist.remove(i);
 			}
 		}
-		
 	}
+	
 	public boolean tagExists(String name, String value) {
 		for(int i = 0; i < taglist.size(); i++) {
 			Tag cur = taglist.get(i);
@@ -58,6 +59,12 @@ public class Photo implements Serializable {
 		
 	}
 	
+
+	public Date getDate() {
+		return date;
+	}
+
+
 	public ArrayList<Tag> getTagList(){
 		return taglist;
 	}

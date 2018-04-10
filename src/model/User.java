@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.*;
 
 public class User implements Serializable{
@@ -94,7 +95,28 @@ public class User implements Serializable{
 		}
 		photolist.addAll(check);
 		return photolist;
+	}
+	/**
+	 * Compares dates and returns a list of photos within the dated range
+	 * @param fromDate start date
+	 * @param toDate end date
+	 * @return An ArrayList of type photo containing the list of photos within a certain range
+	 */
+	
+	public ArrayList<Photo> getPhotosInRange(LocalDate fromDate, LocalDate toDate){
+		ArrayList<Photo> inrange = new ArrayList<Photo>();
+		Calendar from = Calendar.getInstance();
+		Calendar to = Calendar.getInstance();
 		
+		from.set(fromDate.getYear(), fromDate.getMonthValue(), fromDate.getDayOfMonth());
+		to.set(toDate.getYear(), toDate.getMonthValue(), toDate.getDayOfMonth());
+		
+		for(Album album : albums) {
+			for(Photo photo : album.getPhotos()) {
+				
+			}
+		}
+		return inrange;
 	}
 	
 	public static void save(User pdApp) throws IOException {
