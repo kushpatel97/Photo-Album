@@ -11,16 +11,16 @@
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9.0.4" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.PhotoViewController">
    <children>
       <ListView fx:id="listview" layoutX="14.0" layoutY="47.0" prefHeight="286.0" prefWidth="247.0" />
-      <Button fx:id="mDisplay" layoutX="14.0" layoutY="347.0" mnemonicParsing="false" onAction="#display" text="Display Selected Image" />
+      <Button fx:id="mDisplay" layoutX="60.0" layoutY="349.0" mnemonicParsing="false" onAction="#display" text="Display Selected Image" />
       <Button fx:id="mLogOff" layoutX="499.0" layoutY="14.0" mnemonicParsing="false" onAction="#logOut" prefHeight="32.0" prefWidth="77.0" text="Log Off" />
-      <Button fx:id="mAdd" layoutX="307.0" layoutY="251.0" mnemonicParsing="false" onAction="#addPhoto" text="Add Photo" />
-      <Button fx:id="mDelete" layoutX="404.0" layoutY="251.0" mnemonicParsing="false" onAction="#deletePhoto" text="Delete Photo" />
-      <Button fx:id="mSlideshow" layoutX="184.0" layoutY="347.0" mnemonicParsing="false" onAction="#slideshow" text="Slideshow" />
-      <Text fx:id="tCaption" layoutX="282.0" layoutY="229.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Caption:" />
+      <Button fx:id="mAdd" layoutX="288.0" layoutY="206.0" mnemonicParsing="false" onAction="#addPhoto" text="Add Photo" />
+      <Button fx:id="mDelete" layoutX="378.0" layoutY="206.0" mnemonicParsing="false" onAction="#deletePhoto" text="Delete Photo" />
+      <Button fx:id="mSlideshow" layoutX="481.0" layoutY="206.0" mnemonicParsing="false" onAction="#slideshow" text="Slideshow" />
+      <Text fx:id="tCaption" layoutX="278.0" layoutY="167.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Caption:" />
       <Button fx:id="mBack" layoutX="499.0" layoutY="54.0" mnemonicParsing="false" onAction="#back" prefHeight="32.0" prefWidth="77.0" text="Back" />
       <Text layoutX="88.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Photos in Album" />
-      <Text layoutX="341.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Thumbnail" />
-      <ImageView fx:id="displayArea" fitHeight="150.0" fitWidth="200.0" layoutX="278.0" layoutY="47.0" pickOnBounds="true" preserveRatio="true" />
+      <Text layoutX="276.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Thumbnail" />
+      <ImageView fx:id="displayArea" fitHeight="100.0" fitWidth="100.0" layoutX="278.0" layoutY="47.0" pickOnBounds="true" preserveRatio="true" />
       <Button fx:id="mCopy" layoutX="499.0" layoutY="294.0" mnemonicParsing="false" onAction="#copy" text="Copy" />
       <Button fx:id="mMove" layoutX="499.0" layoutY="336.0" mnemonicParsing="false" onAction="#move" text="Move" />
       <Text layoutX="291.0" layoutY="315.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Copy Photo To:" />

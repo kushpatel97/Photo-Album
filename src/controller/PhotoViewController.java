@@ -53,6 +53,9 @@ public class PhotoViewController implements LogoutController {
 	public static Album album; // used to store current user
 	
 	public void start() {
+		displayArea.setFitHeight(100);
+		displayArea.setFitWidth(100);
+		displayArea.setPreserveRatio(false);
 		System.out.println("User Page");
 		update();
 		if(!photolist.isEmpty()) {
