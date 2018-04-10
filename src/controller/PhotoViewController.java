@@ -53,6 +53,12 @@ public class PhotoViewController implements LogoutController {
 		if(!photolist.isEmpty()) {
     		listview.getSelectionModel().select(0); //select first user
 		}
+		
+		if (photolist.size() > 0) {
+			tfCaption.setText(photolist.get(0).caption);
+			display();
+		}
+		listview.getSelectionModel().selectedItemProperty().addListener( (v, oldValue, newValue) -> display() );
 	}
 	
 	public void display() {
@@ -85,6 +91,36 @@ public class PhotoViewController implements LogoutController {
 		
 		Album.save(album);
 		
+	}
+	
+	public void addCaption() throws IOException {
+		String caption = tfCaption.getText().trim();
+		Photo photo = listview.getSelectionModel().getSelectedItem();
+		Optional<ButtonType> result;
+		
+		if (caption.length() == 0) {
+			Alert alert2 = new Alert(AlertType.ERROR);
+			alert2.setTitle("Caption Error");
+			alert2.setContentText("Please enter a valid caption.");
+			alert2.showAndWait();
+			return;
+		} else {
+			Alert alert = new Alert(AlertType.CONFIRMATION);
+			alert.setTitle("Confirm Caption: " + caption);
+			alert.setHeaderText(null);
+			alert.setContentText("Are you sure you want to caption this photo?");
+			result = alert.showAndWait();
+		}
+		
+		if (result.get() == ButtonType.OK) {
+			photo.setCaption(caption);
+			update();
+			album.save(album);
+		} else {
+			return;
+		}
+		return;
+
 	}
 	
 	public void deletePhoto() throws IOException {

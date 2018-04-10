@@ -69,7 +69,7 @@ public class UserController implements LogoutController{
 		if (newValue != null) {
 			tfName.setText(newValue.albumName);	
 			tNumber.setText("Number of Photos: " + newValue.photoCount);
-			tDateSpan.setText("Date Span: \n\t" + newValue.getFirstDate() + " - \n\t" + newValue.getLastDate());
+			tDateSpan.setText("Date Span: \n\t" + newValue.getFirstDate() + " \n\t" + newValue.getLastDate());
 		}
 	}
 	
@@ -77,7 +77,7 @@ public class UserController implements LogoutController{
 		if (albumlist.size() > 0) {
 			Album alb = listview.getSelectionModel().getSelectedItem();
 			tNumber.setText("Number of Photos: " + alb.photoCount);
-			tDateSpan.setText("Date Span: \n\t" + alb.getFirstDate() + " - \n\t" + alb.getLastDate());
+			tDateSpan.setText("Date Span: \n\t" + alb.getFirstDate() + "\n\t" + alb.getLastDate());
 		}
 	}
 	
