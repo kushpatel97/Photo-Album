@@ -92,6 +92,10 @@ public class SearchController implements LogoutController {
 			return;
 		}
 		
+		this.photolist = Main.driver.getCurrent().getPhotosInRange(from, to);
+		//need method to display photos
+		
+		
 		
 	}
 	
