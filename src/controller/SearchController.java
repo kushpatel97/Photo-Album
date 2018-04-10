@@ -17,12 +17,18 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Dialog;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
+import javafx.util.Callback;
+import model.Album;
 import model.Photo;
 import model.Tag;
 
@@ -153,6 +159,79 @@ public class SearchController implements LogoutController {
 		tfName.clear();
 		tfValue.clear();
 
+	}
+	public void createAlbum(ActionEvent event) throws IOException{
+		if(photolist.isEmpty()){
+			 Alert alert = new Alert(AlertType.ERROR);
+			 alert.setTitle("Error Dialog");
+			 alert.setHeaderText("Cannot create album! Searched photos is empty!");
+			 alert.setContentText("Please try different search results");
+
+			   Optional<ButtonType> buttonClicked=alert.showAndWait();
+			   if (buttonClicked.get()==ButtonType.OK) {
+				   alert.close();
+			   }
+			   else {
+				   alert.close();
+			   }
+			return;		
+			
+		}
+		Dialog<String> dialog = new Dialog<>();
+		   dialog.setTitle("Create a New Album from search results");
+		   dialog.setHeaderText("Name for album created from search results ");
+		   dialog.setResizable(true);
+		   
+		   Label albumnameLabel = new Label("Album Name: ");
+		   TextField albumnameTextField = new TextField();
+		   
+		   GridPane grid = new GridPane();
+		   grid.add(albumnameLabel, 1, 1);
+		   grid.add(albumnameTextField, 2, 1);
+		   
+		   dialog.getDialogPane().setContent(grid);
+		   
+		   ButtonType buttonTypeOk = new ButtonType("Add", ButtonData.OK_DONE);
+		   dialog.getDialogPane().getButtonTypes().add(buttonTypeOk);
+		   
+		   dialog.setResultConverter(new Callback<ButtonType, String>() {
+			   @Override
+			   public String call(ButtonType b) {
+				   if (b == buttonTypeOk) {
+					   if (albumnameTextField.getText().trim().isEmpty()) {
+						   Alert alert = new Alert(AlertType.ERROR);
+						   alert.setTitle("Error Dialog");
+						   alert.setHeaderText("Album name required!");
+						   alert.setContentText("Please try again");
+
+						   Optional<ButtonType> buttonClicked=alert.showAndWait();
+						   if (buttonClicked.get()==ButtonType.OK) {
+							   alert.close();
+						   }
+						   else {
+							   alert.close();
+						   }
+						   return null;
+					   }
+											   
+					   return albumnameTextField.getText().trim();
+				   }
+				   return null;
+			   }
+			
+		   });
+		   
+		   Optional<String> result = dialog.showAndWait();
+		   
+		   if (result.isPresent()) {
+			   Album albumFromSearch = new Album(result.get());
+			   Main.driver.getCurrent().addAlbum(albumFromSearch);
+			   for(Photo photo : photolist) {
+				   albumFromSearch.addPhoto(photo);
+			   }
+			   
+		   }
+		
 	}
 
 	public void back(ActionEvent event) throws IOException{

@@ -31,6 +31,6 @@
       <Button fx:id="mSearchDate" layoutX="220.0" layoutY="179.0" mnemonicParsing="false" onAction="#searchByDate" text="Seach By Date" />
       <Button fx:id="mSearchTag" layoutX="107.0" layoutY="359.0" mnemonicParsing="false" onAction="#searchByTags" prefHeight="27.0" prefWidth="108.0" text="Search by Tag" />
       <ImageView fx:id="imageview" fitHeight="150.0" fitWidth="357.0" layoutX="228.0" layoutY="224.0" pickOnBounds="true" preserveRatio="true" />
-      <Button fx:id="mCreateAlbum" layoutX="484.0" layoutY="179.0" mnemonicParsing="false" text="Create Album" />
+      <Button fx:id="mCreateAlbum" layoutX="484.0" layoutY="179.0" mnemonicParsing="false" onAction="#createAlbum" text="Create Album" />
    </children>
 </AnchorPane>
