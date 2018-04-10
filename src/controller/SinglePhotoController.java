@@ -18,6 +18,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
@@ -30,7 +31,7 @@ import model.Tag;
 
 public class SinglePhotoController implements LogoutController {
 	@FXML
-	public ListView<Tag> listview;
+	public ListView<String> listview;
 	
 	@FXML
 	public ImageView displayArea;
@@ -40,11 +41,15 @@ public class SinglePhotoController implements LogoutController {
 	
 	@FXML
 	public TextField tfCaption, tfTagName, tfTagValue;
+	
+	@FXML
+	public TextArea tagArea;
 
 	
 	public static Superuser adminuser = Main.driver;
 	public static ArrayList<Tag> taglist = new ArrayList<>();
-	public ObservableList<Tag> observableList;	
+	public static ArrayList<String> tagdisplay = new ArrayList<>();
+	public ObservableList<String> obstag;	
 	public static Photo photo; // used to store current photo
 	
 	
@@ -86,38 +91,54 @@ public class SinglePhotoController implements LogoutController {
 			return;
 		} else {
 			Tag tag = new Tag(tagName, tagValue);
-			Main.driver.getCurrent().getCurrentAlbum().getCurrentPhoto().addTag(tag.name, tag.value);
-			photo.taglist.add(tag);
+			adminuser.getCurrent().getCurrentAlbum().getCurrentPhoto().addTag(tag.name, tag.value);
+			System.out.println(adminuser.getCurrent().getCurrentAlbum().getCurrentPhoto().getTagList());
+//			Main.driver.getCurrent().getCurrentAlbum().getCurrentPhoto().addTag(tag.name, tag.value);
+//			photo.taglist.add(tag);
 			
-			ArrayList<Tag> temp = Main.driver.getCurrent().getCurrentAlbum().getCurrentPhoto().getTagList();
+//			ArrayList<Tag> temp = Main.driver.getCurrent().getCurrentAlbum().getCurrentPhoto().getTagList();
 		// LEfT OFF HERE
-			
-			Superuser.save(Main.driver);
+			update();
+			Superuser.save(adminuser);
 		}
 		
 	}
 	
+	public void update() {
+		
+		String values = "";
+		ArrayList<Tag> taglist = adminuser.getCurrent().getCurrentAlbum().getCurrentPhoto().getTagList();
+		for(int i=0; i < taglist.size(); i++) {
+			values = "Name: " + taglist.get(i).name + " | Value: " + taglist.get(i).value+"\n"; 
+		}
+		
+		tagArea.setText(values);
+	}
+	
 
 	
-	public void update() {
-		tfCaption.setText(photo.getCaption());
-		
-		File file;
-		if (photo != null) {
-			file = photo.getPic();
-			Image image = new Image(file.toURI().toString());
-			displayArea.setImage(image);
-		}
-		
-		taglist.clear();
-		for (int i = 0; i < photo.getTagList().size(); i++) {
-			taglist.add(photo.getTagList().get(i));
-		}
 
-		observableList = FXCollections.observableArrayList(taglist);
-		listview.setItems(observableList);
-		listview.refresh();
-	} 
+
+	
+//	public void update() {
+//		tfCaption.setText(photo.getCaption());
+//		
+//		File file;
+//		if (photo != null) {
+//			file = photo.getPic();
+//			Image image = new Image(file.toURI().toString());
+//			displayArea.setImage(image);
+//		}
+//		
+//		taglist.clear();
+//		for (int i = 0; i < photo.getTagList().size(); i++) {
+//			taglist.add(photo.getTagList().get(i));
+//		}
+//
+//		observableList = FXCollections.observableArrayList(taglist);
+//		listview.setItems(observableList);
+//		listview.refresh();
+//	} 
 	
 	public void back(ActionEvent event) throws IOException {
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/PhotoView.fxml"));
