@@ -20,6 +20,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import model.Photo;
 import model.Tag;
@@ -34,6 +35,9 @@ public class SlideshowController implements LogoutController {
 	
 	@FXML
 	public TextField tfCaption, tfTagName, tfTagValue;
+	
+	@FXML
+	public Text tStatus;
 
 	public static ArrayList<Photo> album = new ArrayList<>();
 	public static final int frontIndex = 0;
@@ -59,6 +63,11 @@ public class SlideshowController implements LogoutController {
 			Image image = new Image(file.toURI().toString());
 			displayArea.setImage(image);
 		}
+		
+		int ci = currentIndex+1;
+		int bi = backIndex+1;
+		tStatus.setText("Photo: " + ci + " of " + bi);
+		
 	}
 	
 	public void forward() {
@@ -72,6 +81,9 @@ public class SlideshowController implements LogoutController {
 				file = photo.getPic();
 				Image image = new Image(file.toURI().toString());
 				displayArea.setImage(image);
+				int ci = currentIndex+1;
+				int bi = backIndex+1;
+				tStatus.setText("Photo: " + ci + " of " + bi);
 			}
 		}
 	}
@@ -87,6 +99,9 @@ public class SlideshowController implements LogoutController {
 				file = photo.getPic();
 				Image image = new Image(file.toURI().toString());
 				displayArea.setImage(image);
+				int ci = currentIndex+1;
+				int bi = backIndex+1;
+				tStatus.setText("Photo: " + ci + " of " + bi);
 			}
 		}
 	}
