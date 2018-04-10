@@ -37,7 +37,7 @@ public class PhotoViewController implements LogoutController {
 	private Image image;
 	
 	@FXML
-	public Button mLogOff, mBack, mCaption, mAdd, mDelete, mSlideshow, mSearch, mDisplay;
+	public Button mLogOff, mBack, mAdd, mDelete, mSlideshow, mSearch, mDisplay;
 	
 	@FXML
 	public TextField tfCaption;
@@ -56,16 +56,29 @@ public class PhotoViewController implements LogoutController {
 		
 		if (photolist.size() > 0) {
 			tfCaption.setText(photolist.get(0).caption);
-			display();
+			displayThumbnail();
 		}
-		listview.getSelectionModel().selectedItemProperty().addListener( (v, oldValue, newValue) -> display() );
+		listview.getSelectionModel().selectedItemProperty().addListener( (v, oldValue, newValue) -> {
+			displayThumbnail();
+			updateCaption(newValue);
+		});
 	}
 	
-	public void display() {
+	public void displayThumbnail() {
 		Photo photo = listview.getSelectionModel().getSelectedItem();
-		File file = photo.getPic();
-		Image image = new Image(file.toURI().toString());
-		displayArea.setImage(image);
+		File file;
+		if (photo != null) {
+			file = photo.getPic();
+			Image image = new Image(file.toURI().toString());
+			displayArea.setImage(image);
+		}
+		return;
+	}
+	
+	public void updateCaption(Photo photo) {
+		if (photo.getCaption() != "") {
+			tfCaption.setText(photo.caption);
+		}
 	}
 	
 	public void addPhoto() throws IOException {
@@ -91,36 +104,6 @@ public class PhotoViewController implements LogoutController {
 		
 		Album.save(album);
 		
-	}
-	
-	public void addCaption() throws IOException {
-		String caption = tfCaption.getText().trim();
-		Photo photo = listview.getSelectionModel().getSelectedItem();
-		Optional<ButtonType> result;
-		
-		if (caption.length() == 0) {
-			Alert alert2 = new Alert(AlertType.ERROR);
-			alert2.setTitle("Caption Error");
-			alert2.setContentText("Please enter a valid caption.");
-			alert2.showAndWait();
-			return;
-		} else {
-			Alert alert = new Alert(AlertType.CONFIRMATION);
-			alert.setTitle("Confirm Caption: " + caption);
-			alert.setHeaderText(null);
-			alert.setContentText("Are you sure you want to caption this photo?");
-			result = alert.showAndWait();
-		}
-		
-		if (result.get() == ButtonType.OK) {
-			photo.setCaption(caption);
-			update();
-			album.save(album);
-		} else {
-			return;
-		}
-		return;
-
 	}
 	
 	public void deletePhoto() throws IOException {
@@ -177,9 +160,34 @@ public class PhotoViewController implements LogoutController {
 		Stage appStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		searchController.start();
 		appStage.setScene(adminScene);
-		appStage.show();
+		appStage.show();	
+	}
+	
+	public void display(ActionEvent event) throws IOException {
+		if (photolist.size() > 0) {
+			boolean checked = false;
+			for (int x = 0; x < photolist.size(); x++) {
+				if (listview.getSelectionModel().isSelected(x)) {
+					checked = true;
+				}
+			}
+			
+			if (checked) {
+				SinglePhotoController.photo = listview.getSelectionModel().getSelectedItem();
+				FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/SinglePhoto.fxml"));
+				Parent sceneManager = (Parent) fxmlLoader.load();
+				SinglePhotoController singlePhotoController = fxmlLoader.getController();
+				Scene adminScene = new Scene(sceneManager);
+				Stage appStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+				singlePhotoController.start();
+				appStage.setScene(adminScene);
+				appStage.show();	
+			}
+		}
 		
 	}
+	
+	
 	
 	public void back(ActionEvent event) throws IOException {
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/User.fxml"));
