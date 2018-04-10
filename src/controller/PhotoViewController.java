@@ -2,6 +2,7 @@ package controller;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Optional;
 
 import application.Main;
@@ -71,6 +72,7 @@ public class PhotoViewController implements LogoutController {
 			updateCaption();
 		});
 	}
+	
 	
 	public void move() throws IOException {
 		String moveAlbum = tfMove.getText().trim();

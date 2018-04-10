@@ -23,9 +23,9 @@
     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
-      <ListView fx:id="listview" maxWidth="261.0" prefHeight="347.0" prefWidth="261.0" GridPane.rowSpan="3">
+      <ListView fx:id="listview" maxWidth="261.0" prefHeight="342.0" prefWidth="190.0" GridPane.rowSpan="3">
          <GridPane.margin>
-            <Insets top="40.0" />
+            <Insets right="80.0" top="40.0" />
          </GridPane.margin></ListView>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowSpan="3">
          <children>
@@ -48,7 +48,6 @@
                </font>
             </Label>
             <TextField fx:id="tfNewAlbum" layoutX="23.0" layoutY="338.0" />
-            <Button layoutX="18.0" layoutY="279.0" mnemonicParsing="false" text="Sort Albums By" />
             <Button fx:id="mSearch" layoutX="155.0" layoutY="282.0" mnemonicParsing="false" onAction="#search" prefHeight="27.0" prefWidth="112.0" text="Search" />
          </children>
       </AnchorPane>
@@ -57,6 +56,37 @@
             <Font size="18.0" />
          </font>
       </Text>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Sort By:" GridPane.halignment="RIGHT">
+         <GridPane.margin>
+            <Insets bottom="70.0" />
+         </GridPane.margin>
+      </Text>
+      <Button fx:id="mAZ" mnemonicParsing="false" onAction="#sortByAZ" prefHeight="32.0" prefWidth="69.0" text="A -&gt; Z" textAlignment="CENTER" GridPane.halignment="RIGHT" />
+      <Button fx:id="mZA" layoutX="251.0" layoutY="83.0" mnemonicParsing="false" onAction="#sortByZA" prefHeight="32.0" prefWidth="67.0" text="Z -&gt; A" textAlignment="CENTER" GridPane.halignment="RIGHT">
+         <GridPane.margin>
+            <Insets top="110.0" />
+         </GridPane.margin>
+      </Button>
+      <Button fx:id="mIP" layoutX="251.0" layoutY="138.0" mnemonicParsing="false" onAction="#sortByIP" text="^ Photos" textAlignment="CENTER" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="TOP">
+         <GridPane.margin>
+            <Insets top="10.0" />
+         </GridPane.margin>
+      </Button>
+      <Button fx:id="mDP" layoutX="238.0" layoutY="197.0" mnemonicParsing="false" onAction="#sortByDP" text="v Photos" textAlignment="CENTER" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
+         <GridPane.margin>
+            <Insets top="50.0" />
+         </GridPane.margin>
+      </Button>
+      <Button fx:id="mID" layoutX="237.0" layoutY="254.0" mnemonicParsing="false" onAction="#sortByID" prefHeight="32.0" prefWidth="66.0" text="^ Date" textAlignment="CENTER" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="TOP">
+         <GridPane.margin>
+            <Insets />
+         </GridPane.margin>
+      </Button>
+      <Button fx:id="mDD" layoutX="239.0" layoutY="312.0" mnemonicParsing="false" onAction="#sortByDD" prefHeight="32.0" prefWidth="66.0" text="v Date" textAlignment="CENTER" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
+         <GridPane.margin>
+            <Insets top="50.0" />
+         </GridPane.margin>
+      </Button>
    </children>
    <padding>
       <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />

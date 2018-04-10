@@ -28,6 +28,53 @@ public class Album implements Serializable{
 		photoslist = new ArrayList<Photo>();
 	}
 	
+	public static Comparator<Album> sortByAZ = new Comparator<Album>() {
+		public int compare(Album a1, Album a2) {
+			return a1.albumName.compareTo(a2.albumName);
+		}
+	};
+	
+	public static Comparator<Album> sortByZA = new Comparator<Album>() {
+		public int compare(Album a1, Album a2) {
+			return a1.albumName.compareTo(a2.albumName)*-1;
+		}
+	};
+	
+	public static Comparator<Album> sortByIP = new Comparator<Album>() {
+		public int compare(Album a1, Album a2) {
+			int num1 = a1.photoCount;
+			int num2 = a2.photoCount;
+			
+			if (num1 > num2) return -1;
+			if (num2 > num1) return 1;
+			return 0;
+		}
+	};
+	
+	public static Comparator<Album> sortByDP = new Comparator<Album>() {
+		public int compare(Album a1, Album a2) {
+			int num1 = a1.photoCount;
+			int num2 = a2.photoCount;
+			
+			if (num1 > num2) return 1;
+			if (num2 > num1) return -1;
+			return 0;
+		}
+	};
+	
+	public static Comparator<Album> sortByID = new Comparator<Album>() {
+		public int compare(Album a1, Album a2) {
+			return 0;
+			
+		}
+	};
+	
+	public static Comparator<Album> sortByDD = new Comparator<Album>() {
+		public int compare(Album a1, Album a2) {
+			return a1.albumName.compareTo(a2.albumName)*-1;
+		}
+	};
+	
 	public boolean exists(String fp) {
 		if (photoslist.size() > 0 && !fp.isEmpty()) {
 			for(Photo photos : photoslist) {

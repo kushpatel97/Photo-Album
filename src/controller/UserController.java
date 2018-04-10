@@ -2,6 +2,7 @@ package controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Optional;
 
 import application.Main;
@@ -62,6 +63,54 @@ public class UserController implements LogoutController{
 			tDateSpan.setText("Date Span (First, Last): \n\t" + albumlist.get(0).getFirstDate() + "\n\t" + albumlist.get(0).getLastDate());
 		}
 		listview.getSelectionModel().selectedItemProperty().addListener( (v, oldValue, newValue) -> updateContent(newValue) );
+	}
+	
+	public void sortByAZ() throws IOException {
+		Collections.sort(albumlist, Album.sortByAZ);
+		observableList = FXCollections.observableArrayList(albumlist);
+		listview.setItems(observableList);
+		listview.refresh();	
+		User.save(user);
+	}
+	
+	public void sortByZA() throws IOException {
+		Collections.sort(albumlist, Album.sortByZA);
+		observableList = FXCollections.observableArrayList(albumlist);
+		listview.setItems(observableList);
+		listview.refresh();	
+		User.save(user);
+	}
+	
+	public void sortByIP() throws IOException {
+		Collections.sort(albumlist, Album.sortByIP);
+		observableList = FXCollections.observableArrayList(albumlist);
+		listview.setItems(observableList);
+		listview.refresh();	
+		User.save(user);
+	}
+	
+	public void sortByDP() throws IOException {
+		Collections.sort(albumlist, Album.sortByDP);
+		observableList = FXCollections.observableArrayList(albumlist);
+		listview.setItems(observableList);
+		listview.refresh();	
+		User.save(user);
+	}
+	
+	public void sortByID() throws IOException {
+		Collections.sort(albumlist, Album.sortByID);
+		observableList = FXCollections.observableArrayList(albumlist);
+		listview.setItems(observableList);
+		listview.refresh();	
+		User.save(user);
+	}
+	
+	public void sortByDD() throws IOException {
+		Collections.sort(albumlist, Album.sortByDD);
+		observableList = FXCollections.observableArrayList(albumlist);
+		listview.setItems(observableList);
+		listview.refresh();	
+		User.save(user);
 	}
 	
 	// updates with listener
