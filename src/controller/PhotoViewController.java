@@ -20,6 +20,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.text.Text;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -37,14 +38,18 @@ public class PhotoViewController implements LogoutController {
 	private Image image;
 	
 	@FXML
-	public Button mLogOff, mBack, mAdd, mDelete, mSlideshow, mSearch, mDisplay;
+	public Button mLogOff, mBack, mAdd, mDelete, mSlideshow, mSearch, mDisplay, mCopy, mMove;
 	
 	@FXML
-	public TextField tfCaption;
+	public TextField tfCopy, tfMove;
+	
+	@FXML 
+	public Text tCaption;
 
 	public static ArrayList<Photo> photolist = new ArrayList<>();
 	public ObservableList<Photo> observableList;	
 	public static Superuser adminuser = Main.driver;
+	public static ArrayList<Album> albumlist; // for move/copy
 	public static Album album; // used to store current user
 	
 	public void start() {
@@ -55,7 +60,7 @@ public class PhotoViewController implements LogoutController {
 		}
 		
 		if (photolist.size() > 0) {
-			tfCaption.setText(photolist.get(0).caption);
+			tCaption.setText("Caption: " + photolist.get(0).caption);
 			displayThumbnail();
 		}
 		listview.getSelectionModel().selectedItemProperty().addListener( (v, oldValue, newValue) -> {
@@ -63,6 +68,99 @@ public class PhotoViewController implements LogoutController {
 			updateCaption();
 		});
 	}
+	
+	public void move() throws IOException {
+		String moveAlbum = tfMove.getText().trim();
+		boolean inList = false;
+		int albumIndex = 0;
+		for (int x = 0; x < albumlist.size(); x++) {
+			Album tempalbum = albumlist.get(x);
+			if (tempalbum.getName().equals(moveAlbum)) {
+				inList = true;
+				albumIndex = x;
+			}
+		}
+
+		// Move
+		if (!moveAlbum.isEmpty() && inList) {
+			Alert alert = new Alert(AlertType.CONFIRMATION);
+			alert.setTitle("Confirm Logout");
+			alert.setHeaderText(null);
+			alert.setContentText("Are you sure you want to move this photo to " + moveAlbum + "?");
+
+			Optional<ButtonType> result = alert.showAndWait();
+			if (result.get() == ButtonType.OK) { 
+				Album newAlbum = albumlist.get(albumIndex);
+				Photo photo = listview.getSelectionModel().getSelectedItem();
+				newAlbum.addPhoto(photo);
+				album.deletePhoto(listview.getSelectionModel().getSelectedIndex());
+				
+				newAlbum.save(newAlbum);
+				album.save(album);
+			} else {
+				return;
+			}
+		} else {
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setTitle("Move Photo Error");
+			alert.setHeaderText("Album not found or does not exist.");
+			alert.showAndWait();
+			Optional<ButtonType> buttonClicked=alert.showAndWait();
+			if (buttonClicked.get()==ButtonType.OK) {
+				alert.close();
+			}
+			else {
+				alert.close();
+			}
+		}
+		System.out.println("move");
+	}
+	
+	public void copy() throws IOException {
+		String copyAlbum = tfCopy.getText().trim();
+		boolean inList = false;
+		int albumIndex = 0;
+		for (int x = 0; x < albumlist.size(); x++) {
+			Album tempalbum = albumlist.get(x);
+			if (tempalbum.getName().equals(copyAlbum)) {
+				inList = true;
+				albumIndex = x;
+			}
+		}
+
+		// Copy
+		if (!copyAlbum.isEmpty() && inList) {
+			Alert alert = new Alert(AlertType.CONFIRMATION);
+			alert.setTitle("Confirm Logout");
+			alert.setHeaderText(null);
+			alert.setContentText("Are you sure you want to copy this photo to " + copyAlbum + "?");
+
+			Optional<ButtonType> result = alert.showAndWait();
+			if (result.get() == ButtonType.OK) { 
+				Album newAlbum = albumlist.get(albumIndex);
+				Photo photo = listview.getSelectionModel().getSelectedItem();
+				newAlbum.addPhoto(photo);
+				
+				newAlbum.save(newAlbum);
+			} else {
+				return;
+			}
+		} else {
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setTitle("Copy Photo Error");
+			alert.setHeaderText("Album not found or does not exist.");
+			alert.showAndWait();
+			Optional<ButtonType> buttonClicked=alert.showAndWait();
+			if (buttonClicked.get()==ButtonType.OK) {
+				alert.close();
+			}
+			else {
+				alert.close();
+			}
+		}
+		System.out.println("move");
+	}
+	
 	
 	public void displayThumbnail() {
 		Photo photo = listview.getSelectionModel().getSelectedItem();
@@ -80,9 +178,9 @@ public class PhotoViewController implements LogoutController {
 	public void updateCaption() {
 		Photo photo = listview.getSelectionModel().getSelectedItem();
 		if (photolist.size() > 0 && photo != null) {
-			tfCaption.setText(photo.caption);
+			tCaption.setText("Caption: " + photo.caption);
 		} else {
-			tfCaption.setText(null);
+			tCaption.setText("Caption: ");
 		}
 	}
 	

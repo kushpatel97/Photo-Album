@@ -13,17 +13,20 @@
       <ListView fx:id="listview" layoutX="14.0" layoutY="47.0" prefHeight="286.0" prefWidth="247.0" />
       <Button fx:id="mDisplay" layoutX="14.0" layoutY="347.0" mnemonicParsing="false" onAction="#display" text="Display Selected Image" />
       <Button fx:id="mLogOff" layoutX="499.0" layoutY="14.0" mnemonicParsing="false" onAction="#logOut" prefHeight="32.0" prefWidth="77.0" text="Log Off" />
-      <TextField fx:id="tfCaption" layoutX="341.0" layoutY="204.0" prefHeight="26.0" prefWidth="195.0" />
-      <Button fx:id="mAdd" layoutX="282.0" layoutY="253.0" mnemonicParsing="false" onAction="#addPhoto" text="Add Photo" />
-      <Button fx:id="mDelete" layoutX="282.0" layoutY="295.0" mnemonicParsing="false" onAction="#deletePhoto" text="Delete Photo" />
+      <Button fx:id="mAdd" layoutX="307.0" layoutY="251.0" mnemonicParsing="false" onAction="#addPhoto" text="Add Photo" />
+      <Button fx:id="mDelete" layoutX="404.0" layoutY="251.0" mnemonicParsing="false" onAction="#deletePhoto" text="Delete Photo" />
       <Button fx:id="mSlideshow" layoutX="184.0" layoutY="347.0" mnemonicParsing="false" onAction="#slideshow" text="Slideshow" />
-      <Text layoutX="282.0" layoutY="229.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Caption:" />
+      <Text fx:id="tCaption" layoutX="282.0" layoutY="229.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Caption:" />
       <Button fx:id="mBack" layoutX="499.0" layoutY="54.0" mnemonicParsing="false" onAction="#back" prefHeight="32.0" prefWidth="77.0" text="Back" />
       <Text layoutX="88.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Photos in Album" />
-      <Text layoutX="341.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Display Area" />
+      <Text layoutX="341.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Thumbnail" />
       <ImageView fx:id="displayArea" fitHeight="150.0" fitWidth="200.0" layoutX="278.0" layoutY="47.0" pickOnBounds="true" preserveRatio="true" />
-      <Button layoutX="499.0" layoutY="311.0" mnemonicParsing="false" text="Copy" />
-      <Button layoutX="499.0" layoutY="347.0" mnemonicParsing="false" text="Move" />
+      <Button fx:id="mCopy" layoutX="499.0" layoutY="294.0" mnemonicParsing="false" onAction="#copy" text="Copy" />
+      <Button fx:id="mMove" layoutX="499.0" layoutY="336.0" mnemonicParsing="false" onAction="#move" text="Move" />
+      <Text layoutX="291.0" layoutY="315.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Copy Photo To:" />
+      <Text layoutX="290.0" layoutY="357.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Move Photo To:" />
+      <TextField fx:id="tfCopy" layoutX="386.0" layoutY="297.0" prefHeight="26.0" prefWidth="104.0" promptText="Album" />
+      <TextField fx:id="tfMove" layoutX="386.0" layoutY="339.0" prefHeight="26.0" prefWidth="104.0" promptText="Album" />
    </children>
    <padding>
       <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
