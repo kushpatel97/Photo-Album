@@ -54,7 +54,7 @@ public class SinglePhotoController implements LogoutController {
 		}
 	}
 	
-	public void saveCaption() throws IOException {
+	public void saveCaption(ActionEvent event) throws IOException {
 		String caption = tfCaption.getText().trim();
 		Alert alert = new Alert(AlertType.CONFIRMATION);
 		alert.setTitle("Caption Confirmation");
@@ -69,7 +69,7 @@ public class SinglePhotoController implements LogoutController {
 		}
 	}
 	
-	public void addTag() {
+	public void addTag(ActionEvent event) throws IOException {
 		String tagName = tfTagName.getText().trim();
 		String tagValue = tfTagValue.getText().trim();
 		if (tagName.isEmpty() || tagValue.isEmpty()) {
@@ -80,10 +80,18 @@ public class SinglePhotoController implements LogoutController {
 			return;
 		} else {
 			Tag tag = new Tag(tagName, tagValue);
+			Main.driver.getCurrent().getCurrentAlbum().getCurrentPhoto().addTag(tag.name, tag.value);
 			photo.taglist.add(tag);
+			
+			ArrayList<Tag> temp = Main.driver.getCurrent().getCurrentAlbum().getCurrentPhoto().getTagList();
+		// LEfT OFF HERE
+			
+			Superuser.save(Main.driver);
 		}
 		
 	}
+	
+
 	
 	public void update() {
 		tfCaption.setText(photo.getCaption());

@@ -119,7 +119,7 @@ public class User implements Serializable{
 				Calendar today = Calendar.getInstance();
 				
 				int year = pDate.get(Calendar.YEAR);
-				int month = pDate.get(Calendar.MONTH);
+				int month = pDate.get(Calendar.MONTH+1);
 				int dateOfMonth = pDate.get(Calendar.DAY_OF_MONTH);
 				
 				today.set(year, month, dateOfMonth);

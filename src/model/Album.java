@@ -21,6 +21,7 @@ public class Album implements Serializable{
 	public String albumName;
 	public ArrayList<Photo> photoslist;
 	public int photoCount = 0;
+	public Photo currentPhoto;
 	
 	public Album(String albumName) {
 		this.albumName = albumName; 
@@ -94,6 +95,15 @@ public class Album implements Serializable{
 		return photoslist;
 	}
 	
+	
+	public Photo getCurrentPhoto() {
+		return currentPhoto;
+	}
+
+	public void setCurrentPhoto(Photo currentPhoto) {
+		this.currentPhoto = currentPhoto;
+	}
+
 	@Override
 	public String toString() {
 		return getName();
