@@ -100,6 +100,7 @@ public class PhotoViewController implements LogoutController {
 				
 				newAlbum.save(newAlbum);
 				album.save(album);
+				update();
 			} else {
 				return;
 			}
