@@ -64,14 +64,63 @@ public class Album implements Serializable{
 	
 	public static Comparator<Album> sortByID = new Comparator<Album>() {
 		public int compare(Album a1, Album a2) {
-			return 0;
+			Date date1 = null; 
+			if (!a1.photoslist.isEmpty()) {
+				date1 = a1.getPhotos().get(0).date;
+				for (Photo photo: a1.photoslist) {
+					if (photo.date.before(date1)) {
+						date1 = photo.date;
+					}
+				}
+			}
 			
+			Date date2 = null; 
+			if (!a2.photoslist.isEmpty()) {
+				date2 = a2.getPhotos().get(0).date;
+				for (Photo photo: a2.photoslist) {
+					if (photo.date.before(date2)) {
+						date2 = photo.date;
+					}
+				}
+			}
+			
+			if (date1 != null && date2 != null) {
+				if (date1.before(date2)) return 1;
+				if (date2.before(date1)) return -1;	
+			}
+			
+			return 0;
 		}
 	};
 	
 	public static Comparator<Album> sortByDD = new Comparator<Album>() {
 		public int compare(Album a1, Album a2) {
-			return a1.albumName.compareTo(a2.albumName)*-1;
+			Date date1 = null; 
+			if (!a1.photoslist.isEmpty()) {
+				date1 = a1.getPhotos().get(0).date;
+				for (Photo photo: a1.photoslist) {
+					if (photo.date.after(date1)) {
+						date1 = photo.date;
+					}
+				}
+			}
+			
+			Date date2 = null; 
+			if (!a2.photoslist.isEmpty()) {
+				date2 = a2.getPhotos().get(0).date;
+				for (Photo photo: a2.photoslist) {
+					if (photo.date.after(date2)) {
+						date2 = photo.date;
+					}
+				}
+			}
+			
+			if (date1 != null && date2 != null) {
+				if (date1.before(date2)) return 1;
+				if (date2.before(date1)) return -1;	
+			}
+			
+			return 0;
 		}
 	};
 	
