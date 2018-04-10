@@ -41,9 +41,7 @@ public class SinglePhotoController implements LogoutController {
 	
 	@FXML
 	public TextField tfCaption, tfTagName, tfTagValue;
-	
-	@FXML
-	public TextArea tagArea;
+
 
 	
 	public static Superuser adminuser = Main.driver;
@@ -104,15 +102,27 @@ public class SinglePhotoController implements LogoutController {
 		
 	}
 	
+//	public void update() {
+//		String values = "";
+//		ArrayList<Tag> taglist = adminuser.getCurrent().getCurrentAlbum().getCurrentPhoto().getTagList();
+//		for(int i=0; i < taglist.size(); i++) {
+//			values = "Name: " + taglist.get(i).name + " | Value: " + taglist.get(i).value+"\n"; 
+//		}
+//		tagArea.setText(values);
+//	}
+	
 	public void update() {
-		
-		String values = "";
+		tagdisplay.clear();
 		ArrayList<Tag> taglist = adminuser.getCurrent().getCurrentAlbum().getCurrentPhoto().getTagList();
-		for(int i=0; i < taglist.size(); i++) {
-			values = "Name: " + taglist.get(i).name + " | Value: " + taglist.get(i).value+"\n"; 
-		}
 		
-		tagArea.setText(values);
+		for(Tag tag : taglist) {
+			tagdisplay.add("Name: " + tag.name +    " | Value: " + tag.value);
+		}
+		obstag = FXCollections.observableArrayList(tagdisplay);
+		listview.setItems(obstag);
+		
+		tfTagName.clear();
+		tfTagValue.clear();
 	}
 	
 
