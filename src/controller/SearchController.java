@@ -108,7 +108,10 @@ public class SearchController implements LogoutController {
 			}
 			return;
 		}
-		
+		mAnySearch.setVisible(false);
+		mAnySearch.setDisable(true);
+		mAllSearch.setVisible(false);
+		mAllSearch.setVisible(true);
 		this.photolist = Main.driver.getCurrent().getPhotosInRange(from,to);
 
 		//need method to display photos
@@ -135,6 +138,10 @@ public class SearchController implements LogoutController {
 			return;	
 		}
 		System.out.println("Or search");
+		mAllSearch.setVisible(false); 
+		mAllSearch.setDisable(true);
+		mSearchDate.setVisible(false);
+		mSearchDate.setDisable(true);
 		this.photolist = Main.driver.getCurrent().getOrTaggedPhotos(taglist);
 		displayPhotos();
 		// Need to use this list to display pictures some how
@@ -158,6 +165,10 @@ public class SearchController implements LogoutController {
 			return;	
 		}
 		System.out.println("And search");
+		mAnySearch.setVisible(false);
+		mAnySearch.setDisable(true);
+		mSearchDate.setVisible(false);
+		mSearchDate.setDisable(true);
 		this.photolist = Main.driver.getCurrent().getAndTaggedPhotos(taglist);
 		displayPhotos();
 	}

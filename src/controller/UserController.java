@@ -49,7 +49,7 @@ public class UserController implements LogoutController{
 	public ObservableList<Album> observableList;	
 	public static Superuser adminuser = Main.driver;
 	public static User user; // used to store current user
-//	public static boolean stock;
+	public static boolean stock;
 	
 	public void start(Stage app_stage) {
 		update();
@@ -202,13 +202,21 @@ public class UserController implements LogoutController{
 	}
 	
 	public void openAlbum(ActionEvent event) throws IOException {
-//		PhotoViewController.user = user;
+		PhotoViewController.user = user;
 		PhotoViewController.album = listview.getSelectionModel().getSelectedItem();
 		PhotoViewController.albumlist = albumlist;
 		
 		//Changed
 		int albumindex = listview.getSelectionModel().getSelectedIndex();
 		int currentuserindex = adminuser.getUserIndex();
+		if(adminuser.getUsers().get(currentuserindex).getAlbums().size() == 0) { 
+		      Alert alert = new Alert(AlertType.ERROR); 
+		      alert.setTitle("Empty Deletion"); 
+		      alert.setHeaderText(null); 
+		      alert.setContentText("Cannot delete something that isn't there"); 
+		      alert.showAndWait(); 
+		      return; 
+		    } 
 		Album album = adminuser.getUsers().get(currentuserindex).getAlbums().get(albumindex);
 		
 		adminuser.getUsers().get(currentuserindex).setCurrentAlbum(album);
