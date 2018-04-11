@@ -1,5 +1,6 @@
 package controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -11,6 +12,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -22,10 +24,14 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import model.Album;
@@ -43,6 +49,9 @@ public class SearchController implements LogoutController {
 	
 	@FXML
 	public ListView<String> listview;
+	
+	@FXML
+	public ListView<Photo> photolistview;
 	
 	@FXML
 	public ImageView imageview;
@@ -101,7 +110,7 @@ public class SearchController implements LogoutController {
 		
 		this.photolist = Main.driver.getCurrent().getPhotosInRange(from, to);
 		//need method to display photos
-		
+		displayPhotos();
 		
 		
 	}
@@ -123,7 +132,7 @@ public class SearchController implements LogoutController {
 			return;	
 		}
 		this.photolist = Main.driver.getCurrent().getTaggedPhotos(taglist);
-		
+		displayPhotos();
 		// Need to use this list to display pictures some how
 		
 	}
@@ -163,7 +172,65 @@ public class SearchController implements LogoutController {
 	}
 	
 	public void displayPhotos() {
+		obsPhoto = FXCollections.observableArrayList(photolist);
 		
+		photolistview.setCellFactory(new Callback<ListView<Photo>, ListCell<Photo>>(){
+			@Override
+			public ListCell<Photo> call(ListView<Photo> p){
+				return new Results();
+			}
+			
+		});
+		
+		photolistview.setItems(obsPhoto);
+		
+	    if(!obsPhoto.isEmpty()) {
+	    		photolistview.getSelectionModel().select(0); //select first photo of album
+	    }
+		
+	}
+	
+	private class Results extends ListCell<Photo>{
+		AnchorPane anchor = new AnchorPane();
+		StackPane stackpane = new StackPane();
+		
+		ImageView imageView = new ImageView();
+		
+		public Results() {
+			super();
+			
+			imageView.setFitWidth(100.0);
+			imageView.setFitHeight(100.0);
+			imageView.setPreserveRatio(true);
+
+			StackPane.setAlignment(imageView, Pos.TOP_LEFT);
+			stackpane.getChildren().add(imageView);			
+			stackpane.setPrefHeight(110.0);
+			stackpane.setPrefWidth(90.0);
+			
+			AnchorPane.setLeftAnchor(stackpane, 0.0);
+			anchor.getChildren().addAll(stackpane);
+			anchor.setPrefHeight(110.0);
+			setGraphic(anchor);	
+			
+		}
+		
+		@Override
+		public void updateItem(Photo photo, boolean empty) {
+			super.updateItem(photo, empty);
+			
+			setText(null);
+			if(photo == null)
+			{				
+				
+			}
+			
+			else{
+				Image img = new Image(photo.pic.toURI().toString());
+				imageView.setImage(img);
+			}
+			
+		}
 	}
 	
 	public void createAlbum(ActionEvent event) throws IOException{
