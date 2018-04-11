@@ -54,6 +54,7 @@ public class SearchController implements LogoutController {
 	public ArrayList<Tag> taglist = new ArrayList<Tag>();
 	public ArrayList<String> tagdisplay = new ArrayList<String>();
 	public ObservableList<String> obsTag;
+	public ObservableList<Photo> obsPhoto;
 	
 	//Storing photos
 	public ArrayList<Photo> photolist = new ArrayList<Photo>();
@@ -160,6 +161,11 @@ public class SearchController implements LogoutController {
 		tfValue.clear();
 
 	}
+	
+	public void displayPhotos() {
+		
+	}
+	
 	public void createAlbum(ActionEvent event) throws IOException{
 		if(photolist.isEmpty()){
 			 Alert alert = new Alert(AlertType.ERROR);

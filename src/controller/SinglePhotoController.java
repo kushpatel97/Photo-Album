@@ -114,10 +114,17 @@ public class SinglePhotoController implements LogoutController {
 
 	
 	public void update() {
-		tagdisplay.clear();
-		ArrayList<Tag> taglist = adminuser.getCurrent().getCurrentAlbum().getCurrentPhoto().getTagList();
+		File file;
+		if (photo != null) {
+			file = photo.getPic();
+			Image image = new Image(file.toURI().toString());
+			displayArea.setImage(image);
+		}
 		
-		for(Tag tag : taglist) {
+		tagdisplay.clear();
+		ArrayList<Tag> tags = adminuser.getCurrent().getCurrentAlbum().getCurrentPhoto().getTagList();
+		
+		for(Tag tag : tags) {
 			tagdisplay.add("Name: " + tag.name +    " | Value: " + tag.value);
 		}
 		obstag = FXCollections.observableArrayList(tagdisplay);
