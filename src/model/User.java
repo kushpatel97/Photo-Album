@@ -106,22 +106,24 @@ public class User implements Serializable{
 		ArrayList<Photo> photolist = new ArrayList<Photo>();
 		//Used to make sure no duplicates
 		HashSet<Photo> check = new HashSet<Photo>();
-//		for(Tag tag : taggedlist) {
+		
 		System.out.println(taggedlist);
 			for(Album album : albums) {
 				for(Photo photo : album.getPhotos()) {
 					System.out.print(photo.getTagList());
-//					if(taggedlist.containsAll(photo.getTagList())) {
-////						photolist.add(photo);
-//						check.add(photo);
-//					}
+					if(photo.getTagList().containsAll(taggedlist)) {
+//						photolist.add(photo);
+						check.add(photo);
+					}
 				}
 				
-//			}
 		}
 		photolist.addAll(check);
 		return photolist;
 	}
+	
+	
+	
 	
 	/**
 	 * Compares dates and returns a list of photos within the dated range

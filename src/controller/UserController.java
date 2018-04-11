@@ -49,7 +49,7 @@ public class UserController implements LogoutController{
 	public ObservableList<Album> observableList;	
 	public static Superuser adminuser = Main.driver;
 	public static User user; // used to store current user
-	public static boolean stock;
+//	public static boolean stock;
 	
 	public void start(Stage app_stage) {
 		update();
@@ -202,7 +202,7 @@ public class UserController implements LogoutController{
 	}
 	
 	public void openAlbum(ActionEvent event) throws IOException {
-		PhotoViewController.user = user;
+//		PhotoViewController.user = user;
 		PhotoViewController.album = listview.getSelectionModel().getSelectedItem();
 		PhotoViewController.albumlist = albumlist;
 		

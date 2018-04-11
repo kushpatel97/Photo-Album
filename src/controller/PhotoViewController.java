@@ -50,7 +50,7 @@ public class PhotoViewController implements LogoutController {
 	public static ArrayList<Photo> photolist = new ArrayList<>();
 	public ObservableList<Photo> observableList;	
 	public static Superuser adminuser = Main.driver;
-	public static User user;
+//	public static User user;
 	public static ArrayList<Album> albumlist; // for move/copy
 	public static Album album; // used to store current user
 	
@@ -210,10 +210,24 @@ public class PhotoViewController implements LogoutController {
 			alert.showAndWait();
 			return;
 		}*/ else {
-			String filepath = imgfile.getAbsolutePath();
-			Photo newPhoto = new Photo(imgfile, filepath);
-			album.addPhoto(newPhoto);
-			update();	
+			if(adminuser.getCurrent().getUsername().equals("stock")) {
+				String filepath = imgfile.getAbsolutePath();
+				int stkphoto = filepath.indexOf("stockphotos");
+				String newfilepath = filepath.substring(stkphoto, filepath.length());
+				Photo newPhoto = new Photo(imgfile, newfilepath);
+				album.addPhoto(newPhoto);
+				update();
+				
+			}
+			else {
+				String filepath = imgfile.getAbsolutePath();
+				Photo newPhoto = new Photo(imgfile, filepath);
+				album.addPhoto(newPhoto);
+				update();
+			}
+		}
+		if(!photolist.isEmpty()) {
+    		listview.getSelectionModel().select(0); //select first user
 		}
 		
 		Album.save(album);

@@ -12,4 +12,17 @@ public class Tag implements Serializable {
 	}
 	
 	// more functions
+	
+	
+	@Override
+	public boolean equals(Object o) {
+		if(o == null || !( o instanceof Tag) ) {
+			return false;
+		}
+		
+		Tag tag = (Tag) o;
+		
+		
+		return tag.name.equals(this.name) && tag.value.equals(this.value);
+	}
 }
