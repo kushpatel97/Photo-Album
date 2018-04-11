@@ -62,6 +62,9 @@ public class PhotoViewController implements LogoutController {
 		displayArea.setPreserveRatio(false);
 		System.out.println("User Page");
 		update();
+		if(adminuser.getCurrent().getCurrentAlbum().getPhotos().size() == 0) {
+			mDelete.setVisible(false);
+		}
 		if(!photolist.isEmpty()) {
     		listview.getSelectionModel().select(0); //select first user
 		}
