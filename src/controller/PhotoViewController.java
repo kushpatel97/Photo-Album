@@ -45,7 +45,7 @@ public class PhotoViewController implements LogoutController {
 	public TextField tfCopy, tfMove;
 	
 	@FXML 
-	public Text tCaption;
+	public Text tCaption, tDate;
 
 	public static ArrayList<Photo> photolist = new ArrayList<>();
 	public ObservableList<Photo> observableList;	
@@ -71,6 +71,7 @@ public class PhotoViewController implements LogoutController {
 		
 		if (photolist.size() > 0) {
 			tCaption.setText("Caption: " + photolist.get(0).caption);
+			tDate.setText("Date: " + photolist.get(0).date);
 			displayThumbnail();
 		}
 		listview.getSelectionModel().selectedItemProperty().addListener( (v, oldValue, newValue) -> {
@@ -193,8 +194,10 @@ public class PhotoViewController implements LogoutController {
 		Photo photo = listview.getSelectionModel().getSelectedItem();
 		if (photolist.size() > 0 && photo != null) {
 			tCaption.setText("Caption: " + photo.caption);
+			tDate.setText("Date: " + photo.date);
 		} else {
 			tCaption.setText("Caption: ");
+			tDate.setText("Date: ");
 		}
 	}
 	
