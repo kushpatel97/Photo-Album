@@ -10,6 +10,8 @@ import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
+import controller.UserController;
+
 public class Album implements Serializable{
 	
 	/**

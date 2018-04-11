@@ -47,9 +47,11 @@ public class LoginController {
 		}
 		else if (driver.checkUser(username)) {
 			//Changed
+			if (username.equals("stock")) {
+				UserController.stock = true;
+			}
 			User currentUser = driver.getCurrent();
 			ArrayList<Album> useralbums = currentUser.getAlbums();
-			
 			UserController.username = username;
 			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/User.fxml"));
 			Parent sceneManager = (Parent) fxmlLoader.load();

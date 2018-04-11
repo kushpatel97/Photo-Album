@@ -50,6 +50,7 @@ public class PhotoViewController implements LogoutController {
 	public static ArrayList<Photo> photolist = new ArrayList<>();
 	public ObservableList<Photo> observableList;	
 	public static Superuser adminuser = Main.driver;
+	public static User user;
 	public static ArrayList<Album> albumlist; // for move/copy
 	public static Album album; // used to store current user
 	
