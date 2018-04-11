@@ -105,25 +105,26 @@ public class User implements Serializable{
 	 */
 	public ArrayList<Photo> getPhotosInRange(LocalDate fromDate, LocalDate toDate){
 		ArrayList<Photo> inrange = new ArrayList<Photo>();
-		Calendar from = Calendar.getInstance();
-		Calendar to = Calendar.getInstance();
+		Calendar startdate = Calendar.getInstance();
+		startdate.set(fromDate.getYear(), fromDate.getMonthValue(), fromDate.getDayOfMonth());
 		
-		from.set(fromDate.getYear(), fromDate.getMonthValue(), fromDate.getDayOfMonth());
-		to.set(toDate.getYear(), toDate.getMonthValue(), toDate.getDayOfMonth());
+		Calendar enddate = Calendar.getInstance();
+		enddate.set(toDate.getYear(), toDate.getMonthValue(), toDate.getDayOfMonth());
 		
 		for(Album album : albums) {
 			for(Photo photo : album.getPhotos()) {
 				Date date = photo.getDate();
 				Calendar pDate = Calendar.getInstance();
 				pDate.setTime(date);
+				
 				Calendar today = Calendar.getInstance();
 				
 				int year = pDate.get(Calendar.YEAR);
-				int month = pDate.get(Calendar.MONTH+1);
+				int month = pDate.get(Calendar.MONTH)+1;
 				int dateOfMonth = pDate.get(Calendar.DAY_OF_MONTH);
 				
 				today.set(year, month, dateOfMonth);
-				if((today.compareTo(from) > 0 && today.compareTo(to) < 0) || today.equals(from) || today.equals(to)) {
+				if((today.compareTo(startdate) > 0 && today.compareTo(enddate) < 0) || today.equals(startdate) || today.equals(enddate)) {
 					inrange.add(photo);
 				}
 				
@@ -131,7 +132,7 @@ public class User implements Serializable{
 		}
 		return inrange;
 	}
-	
+
 	public static void save(User pdApp) throws IOException {
 		ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(storeDir + File.separator + storeFile));
 		oos.writeObject(pdApp);
