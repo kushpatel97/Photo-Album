@@ -13,7 +13,7 @@
       <Button fx:id="mLogOff" layoutX="540.0" layoutY="15.0" mnemonicParsing="false" onAction="#logOut" prefHeight="32.0" prefWidth="77.0" text="Log Off" />
       <TextField fx:id="tfCaption" layoutX="23.0" layoutY="347.0" prefHeight="26.0" prefWidth="195.0" />
       <Button fx:id="mCaption" layoutX="232.0" layoutY="347.0" mnemonicParsing="false" onAction="#saveCaption" text="Save Caption" />
-      <Button fx:id="mRemoveTag" layoutX="446.0" layoutY="260.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="142.0" text="Remove Selected Tag" />
+      <Button fx:id="mRemoveTag" layoutX="446.0" layoutY="260.0" mnemonicParsing="false" onAction="#removeTag" prefHeight="27.0" prefWidth="142.0" text="Remove Selected Tag" />
       <Button fx:id="mAddTag" layoutX="446.0" layoutY="295.0" mnemonicParsing="false" onAction="#addTag" prefHeight="27.0" prefWidth="142.0" text="Add Tag" />
       <Text layoutX="23.0" layoutY="341.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Caption:" />
       <Button fx:id="mBack" layoutX="23.0" layoutY="15.0" mnemonicParsing="false" onAction="#back" prefHeight="32.0" prefWidth="77.0" text="Back" />

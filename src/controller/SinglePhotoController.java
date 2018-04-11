@@ -3,6 +3,7 @@ package controller;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Optional;
 
 import application.Main;
@@ -91,10 +92,7 @@ public class SinglePhotoController implements LogoutController {
 			Tag tag = new Tag(tagName, tagValue);
 			adminuser.getCurrent().getCurrentAlbum().getCurrentPhoto().addTag(tag.name, tag.value);
 			System.out.println(adminuser.getCurrent().getCurrentAlbum().getCurrentPhoto().getTagList());
-//			Main.driver.getCurrent().getCurrentAlbum().getCurrentPhoto().addTag(tag.name, tag.value);
-//			photo.taglist.add(tag);
-			
-//			ArrayList<Tag> temp = Main.driver.getCurrent().getCurrentAlbum().getCurrentPhoto().getTagList();
+
 		// LEfT OFF HERE
 			update();
 			Superuser.save(adminuser);
@@ -102,14 +100,18 @@ public class SinglePhotoController implements LogoutController {
 		
 	}
 	
-//	public void update() {
-//		String values = "";
-//		ArrayList<Tag> taglist = adminuser.getCurrent().getCurrentAlbum().getCurrentPhoto().getTagList();
-//		for(int i=0; i < taglist.size(); i++) {
-//			values = "Name: " + taglist.get(i).name + " | Value: " + taglist.get(i).value+"\n"; 
-//		}
-//		tagArea.setText(values);
-//	}
+	public void removeTag(ActionEvent event) throws IOException{
+		int index = listview.getSelectionModel().getSelectedIndex();
+		
+		ArrayList<Tag> taglist = adminuser.getCurrent().getCurrentAlbum().getCurrentPhoto().getTagList();
+		adminuser.getCurrent().getCurrentAlbum().getCurrentPhoto().removeTag(taglist.get(index).name, taglist.get(index).value);
+		
+		update();
+		Superuser.save(adminuser);
+		
+	}
+	
+
 	
 	public void update() {
 		tagdisplay.clear();
@@ -120,7 +122,7 @@ public class SinglePhotoController implements LogoutController {
 		}
 		obstag = FXCollections.observableArrayList(tagdisplay);
 		listview.setItems(obstag);
-		
+		System.out.println(taglist.toString());
 		tfTagName.clear();
 		tfTagValue.clear();
 	}
