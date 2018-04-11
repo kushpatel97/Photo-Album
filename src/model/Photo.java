@@ -31,7 +31,8 @@ public class Photo implements Serializable {
 	
 	public Photo(File pic, String photoname) {
 		this.photoname = photoname; 
-		this.pic = pic;
+		if (pic != null) this.pic = new File(photoname);
+		else this.pic = pic;
 		this.taglist = new ArrayList<Tag>();
 		cal = new GregorianCalendar();
 		cal.set(Calendar.MILLISECOND, 0);
