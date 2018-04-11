@@ -120,6 +120,7 @@ public class PhotoViewController implements LogoutController {
 			else {
 				alert.close();
 			}
+			return;
 		}
 		System.out.println("move");
 	}
@@ -165,6 +166,7 @@ public class PhotoViewController implements LogoutController {
 			else {
 				alert.close();
 			}
+			return;
 		}
 		System.out.println("move");
 	}

@@ -77,12 +77,12 @@
             <Insets top="50.0" />
          </GridPane.margin>
       </Button>
-      <Button fx:id="mID" layoutX="237.0" layoutY="254.0" mnemonicParsing="false" onAction="#sortByID" prefHeight="32.0" prefWidth="66.0" text="^ Date" textAlignment="CENTER" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="TOP">
+      <Button fx:id="mID" layoutX="237.0" layoutY="254.0" mnemonicParsing="false" onAction="#sortByID" prefHeight="32.0" prefWidth="66.0" text="F. Date" textAlignment="CENTER" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="TOP">
          <GridPane.margin>
             <Insets />
          </GridPane.margin>
       </Button>
-      <Button fx:id="mDD" layoutX="239.0" layoutY="312.0" mnemonicParsing="false" onAction="#sortByDD" prefHeight="32.0" prefWidth="66.0" text="v Date" textAlignment="CENTER" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
+      <Button fx:id="mDD" layoutX="239.0" layoutY="312.0" mnemonicParsing="false" onAction="#sortByDD" prefHeight="32.0" prefWidth="66.0" text="L. Date" textAlignment="CENTER" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
          <GridPane.margin>
             <Insets top="50.0" />
          </GridPane.margin>

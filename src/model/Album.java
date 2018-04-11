@@ -87,6 +87,10 @@ public class Album implements Serializable{
 			if (date1 != null && date2 != null) {
 				if (date1.before(date2)) return 1;
 				if (date2.before(date1)) return -1;	
+			} else if (date1 == null && date2 !=null) {
+				return 1;
+			} else if (date1 != null && date2 == null) {
+				return -1;
 			}
 			
 			return 0;
@@ -118,6 +122,10 @@ public class Album implements Serializable{
 			if (date1 != null && date2 != null) {
 				if (date1.before(date2)) return 1;
 				if (date2.before(date1)) return -1;	
+			} else if (date1 == null && date2 !=null) {
+				return 1;
+			} else if (date1 != null && date2 == null) {
+				return -1;
 			}
 			
 			return 0;
