@@ -42,7 +42,7 @@ public class SearchController implements LogoutController {
 
 	
 	@FXML
-	public Button mBack, mLogOff, mAddTag, mSearchTag, mSearchDate, mCreateAlbum;
+	public Button mBack, mLogOff, mAddTag, mAnySearch, mAllSearch, mSearchDate, mCreateAlbum;
 	
 	@FXML
 	public TextField tfName, tfValue;
@@ -74,6 +74,7 @@ public class SearchController implements LogoutController {
 	}
 	
 	public void searchByDate(ActionEvent event) throws IOException {
+		this.photolist.clear();
 		LocalDate from = dFrom.getValue();
 		LocalDate to = dTo.getValue();
 		
@@ -116,7 +117,8 @@ public class SearchController implements LogoutController {
 		
 	}
 	
-	public void searchByTags(ActionEvent event) throws IOException{
+	public void orSearch(ActionEvent event) throws IOException{
+		this.photolist.clear();
 		if(taglist.isEmpty() || taglist == null) {
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setTitle("Empty List!");
@@ -132,10 +134,32 @@ public class SearchController implements LogoutController {
 			}
 			return;	
 		}
-		this.photolist = Main.driver.getCurrent().getTaggedPhotos(taglist);
+		System.out.println("Or search");
+		this.photolist = Main.driver.getCurrent().getOrTaggedPhotos(taglist);
 		displayPhotos();
 		// Need to use this list to display pictures some how
 		
+	}
+	
+	public void andSearch(ActionEvent event) throws IOException {
+		if(taglist.isEmpty() || taglist == null) {
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setTitle("Empty List!");
+			alert.setHeaderText("Please add tags to the list");
+			alert.setContentText("List of tags is empty!");
+
+			Optional<ButtonType> buttonClicked=alert.showAndWait();
+			if (buttonClicked.get()==ButtonType.OK) {
+				alert.close();
+			}
+			else {
+			   alert.close();
+			}
+			return;	
+		}
+		System.out.println("And search");
+		this.photolist = Main.driver.getCurrent().getAndTaggedPhotos(taglist);
+		displayPhotos();
 	}
 	
 	public void addTag(ActionEvent event) throws IOException {

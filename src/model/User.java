@@ -13,7 +13,8 @@ import java.util.*;
 public class User implements Serializable{
 
 	/**
-	 * 
+	 * @author Alex Louie
+	 * @author Kush Patel
 	 */
 	private static final long serialVersionUID = 1L;
 	public String username;
@@ -23,15 +24,17 @@ public class User implements Serializable{
 	public static final String storeDir = "dat";
 	public static final String storeFile = "users.dat";
 
-	public void printAlbums() {
-		for (Album album: albums) {
-			System.out.println(album.albumName);
-		}
-	}
+
 	
 	public User(String username) {
 		this.username = username;
 		albums = new ArrayList<Album>();
+	}
+	
+	public void printAlbums() {
+		for (Album album: albums) {
+			System.out.println(album.albumName);
+		}
 	}
 	
 	public void addAlbum(Album album) {
@@ -79,7 +82,7 @@ public class User implements Serializable{
 		this.currentAlbum = currentAlbum;
 	}
 	
-	public ArrayList<Photo> getTaggedPhotos(ArrayList<Tag> taggedlist){
+	public ArrayList<Photo> getOrTaggedPhotos(ArrayList<Tag> taggedlist){
 		ArrayList<Photo> photolist = new ArrayList<Photo>();
 		//Used to make sure no duplicates
 		HashSet<Photo> check = new HashSet<Photo>();
@@ -92,6 +95,29 @@ public class User implements Serializable{
 				}
 				
 			}
+		}
+		photolist.addAll(check);
+		return photolist;
+	}
+	
+	
+	public ArrayList<Photo> getAndTaggedPhotos(ArrayList<Tag> taggedlist){
+		System.out.println("Gettin And Photos");
+		ArrayList<Photo> photolist = new ArrayList<Photo>();
+		//Used to make sure no duplicates
+		HashSet<Photo> check = new HashSet<Photo>();
+//		for(Tag tag : taggedlist) {
+		System.out.println(taggedlist);
+			for(Album album : albums) {
+				for(Photo photo : album.getPhotos()) {
+					System.out.print(photo.getTagList());
+//					if(taggedlist.containsAll(photo.getTagList())) {
+////						photolist.add(photo);
+//						check.add(photo);
+//					}
+				}
+				
+//			}
 		}
 		photolist.addAll(check);
 		return photolist;
