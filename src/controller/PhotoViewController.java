@@ -249,6 +249,7 @@ public class PhotoViewController implements LogoutController {
 			if (album.getPhotos().size() == 0) {
 				mDelete.setVisible(false);
 		    } else {
+		    	mDelete.setVisible(true);
 		    	int lastuserindex = album.getPhotos().size();
 				if (album.getPhotos().size() == 1) {
 					listview.getSelectionModel().select(0);
