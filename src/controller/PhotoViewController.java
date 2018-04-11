@@ -201,6 +201,8 @@ public class PhotoViewController implements LogoutController {
 		filechooser.getExtensionFilters().add(extFilterJPG);
 		File imgfile = filechooser.showOpenDialog(null);
 		
+		
+		
 		if (imgfile == null) {
 			return;
 		} /*else if (album.exists(imgfile.getAbsolutePath())) {
@@ -210,21 +212,15 @@ public class PhotoViewController implements LogoutController {
 			alert.showAndWait();
 			return;
 		}*/ else {
-			if(adminuser.getCurrent().getUsername().equals("stock")) {
-				String filepath = imgfile.getAbsolutePath();
-				int stkphoto = filepath.indexOf("stockphotos");
-				String newfilepath = filepath.substring(stkphoto, filepath.length());
-				Photo newPhoto = new Photo(imgfile, newfilepath);
-				album.addPhoto(newPhoto);
-				update();
-				
-			}
-			else {
+			
 				String filepath = imgfile.getAbsolutePath();
 				Photo newPhoto = new Photo(imgfile, filepath);
 				album.addPhoto(newPhoto);
 				update();
-			}
+			
+		}
+		if(adminuser.getCurrent().getCurrentAlbum().getPhotos().size() > 0) {
+			mDelete.setVisible(true);
 		}
 		if(!photolist.isEmpty()) {
     		listview.getSelectionModel().select(0); //select first user
@@ -235,6 +231,7 @@ public class PhotoViewController implements LogoutController {
 	}
 	
 	public void deletePhoto() throws IOException {
+
 		int index = listview.getSelectionModel().getSelectedIndex();
 		Alert alert = new Alert(AlertType.CONFIRMATION);
 		alert.setTitle("Confirm Delete");
@@ -246,10 +243,9 @@ public class PhotoViewController implements LogoutController {
 			album.deletePhoto(index);
 			update();
 			   
-			if (album.getPhotos().size() == 0) {
+			if (adminuser.getCurrent().getCurrentAlbum().getPhotos().size() == 0) {
 				mDelete.setVisible(false);
-		    } else {
-		    	mDelete.setVisible(true);
+		    }else {  
 		    	int lastuserindex = album.getPhotos().size();
 				if (album.getPhotos().size() == 1) {
 					listview.getSelectionModel().select(0);
