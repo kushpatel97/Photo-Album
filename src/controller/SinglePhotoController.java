@@ -30,6 +30,11 @@ import model.Photo;
 import model.Superuser;
 import model.Tag;
 
+/**
+ * This class controls the view/ functions of a single image
+ * @author Kush Patel
+ *
+ */
 public class SinglePhotoController implements LogoutController {
 	@FXML
 	public ListView<String> listview;
@@ -43,27 +48,52 @@ public class SinglePhotoController implements LogoutController {
 	@FXML
 	public TextField tfCaption, tfTagName, tfTagValue;
 
-
-	
+	/**
+	 * An instance of the admin that is created to help keep track of current values
+	 */
 	public static Superuser adminuser = Main.driver;
+	
+	/**
+	 * Stores the instances of tags
+	 */
 	public static ArrayList<Tag> taglist = new ArrayList<>();
+	
+	/**
+	 * Stores the properties of a tag in a string format
+	 */
 	public static ArrayList<String> tagdisplay = new ArrayList<>();
-	public ObservableList<String> obstag;	
-	public static Photo photo; // used to store current photo
 	
+	/**
+	 * Helps display a list of tags in a listview
+	 */
+	public ObservableList<String> obstag;
 	
+	/**
+	 * Current instance of photo
+	 */
+	public static Photo photo; 
+	
+	/**
+	 * sets the title of the scene to current caption of the photo. As well as updates the current tag list.
+	 * @param app_stage
+	 */
 	public void start(Stage app_stage) {
 		//See if at current photo by caption
 		app_stage.setTitle(adminuser.getCurrent().getCurrentAlbum().getCurrentPhoto().getCaption() + " ");
 		
 		//End changes
-		System.out.println("At single photo");
 		update();
 		if(!taglist.isEmpty()) {
     		listview.getSelectionModel().select(0); //select first user
 		}
 	}
 	
+	
+	/**
+	 * Uses the text view to save captions
+	 * @param event
+	 * @throws IOException
+	 */
 	public void saveCaption(ActionEvent event) throws IOException {
 		String caption = tfCaption.getText().trim();
 		Alert alert = new Alert(AlertType.CONFIRMATION);

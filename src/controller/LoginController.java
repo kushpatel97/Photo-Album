@@ -18,16 +18,36 @@ import model.Album;
 import model.Superuser;
 import model.User;
 
+/**
+ * @author Kush Patel
+ * @author Alex Louie
+ *
+ */
 public class LoginController {
 	
+																		
 	@FXML public Button mLogIn;
 	
 	@FXML public TextField tfUsername;
 	
+	/**
+	 * A string that holds the value of admin
+	 */
 	public final String admin = "admin";
 	
+	/**
+	 * A Superuser instance that helps maintain the state of the program
+	 */
 	public static Superuser driver = Main.driver;
 
+	/**
+	 * A login activity that redirects the user based on the username.
+	 * The username admin will redirect the user to the admin page.
+	 * If the user exists, they will be redirected to their own album page
+	 * If no user exists, an error message will appear
+	 * @param event
+	 * @throws IOException
+	 */
 	public void login(ActionEvent event) throws IOException {
 		
 		//Make lowercase idk????. Also check edge cases
@@ -63,7 +83,7 @@ public class LoginController {
 			appStage.show();
 		}
 		else if (username.isEmpty() || username == null) {
-			System.out.print("Empty String");
+//			System.out.print("Empty String");
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setTitle("Error Dialog");
 			alert.setHeaderText("Please enter a username");
@@ -93,13 +113,13 @@ public class LoginController {
 		
 	}
 	
-	public static boolean isUser(String user) {
-		for (int i = 0; i < driver.getUsers().size(); i++) {
-			if (driver.getUsers().get(i).getUsername().equals(user)) {
-				return true;
-			} 
-		}
-		
-		return false;
-	}
+//	public static boolean isUser(String user) {
+//		for (int i = 0; i < driver.getUsers().size(); i++) {
+//			if (driver.getUsers().get(i).getUsername().equals(user)) {
+//				return true;
+//			} 
+//		}
+//		
+//		return false;
+//	}
 }

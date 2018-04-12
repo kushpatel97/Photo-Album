@@ -38,6 +38,12 @@ import model.Album;
 import model.Photo;
 import model.Tag;
 
+/**
+ * A search class that has multiple search functions for the user
+ * @author Kush Patel
+ * @author Alex Louie
+ *
+ */
 public class SearchController implements LogoutController {
 
 	
@@ -59,20 +65,45 @@ public class SearchController implements LogoutController {
 	@FXML
 	public DatePicker dTo, dFrom;
 	
-	
+	/**
+	 * Stores instances of tags
+	 */
 	public ArrayList<Tag> taglist = new ArrayList<Tag>();
+	
+	/**
+	 * Stores the properties of a tag in a string format
+	 */
 	public ArrayList<String> tagdisplay = new ArrayList<String>();
+	
+	/**
+	 * Helps display a list of tags in a listview
+	 */
 	public ObservableList<String> obsTag;
+	
+	/**
+	 * Helps display the results of a search in a listview
+	 */
 	public ObservableList<Photo> obsPhoto;
 	
-	//Storing photos
+	/**
+	 * An array list that stores instances of photos that are returned from searches
+	 */
 	public ArrayList<Photo> photolist = new ArrayList<Photo>();
 	
+	
+	/**
+	 * On start this method kicks off
+	 */
 	public void start() {
-		System.out.println("At start");
+//		System.out.println("At start");
 		
 	}
 	
+	/**
+	 * Allows users to search for a group of photos within a certain date
+	 * @param event
+	 * @throws IOException
+	 */
 	public void searchByDate(ActionEvent event) throws IOException {
 		this.photolist.clear();
 		LocalDate from = dFrom.getValue();
@@ -120,6 +151,12 @@ public class SearchController implements LogoutController {
 		
 	}
 	
+	/**
+	 * Allows the users to search for photos based on tags that appear in the taglist.
+	 * Populates photolist with photos that match any of the tags that exist in the taglist
+	 * @param event
+	 * @throws IOException
+	 */
 	public void orSearch(ActionEvent event) throws IOException{
 		this.photolist.clear();
 		if(taglist.isEmpty() || taglist == null) {
@@ -148,6 +185,13 @@ public class SearchController implements LogoutController {
 		
 	}
 	
+	/**
+	 * Allows the users to search for photos based on tags that appear in the taglist.
+	 * Populates photolist with photos that match if and only if all the tags in the taglist appear in the photo.
+	 * All tags in the taglist must match all the tags of a photo
+	 * @param event
+	 * @throws IOException
+	 */
 	public void andSearch(ActionEvent event) throws IOException {
 		if(taglist.isEmpty() || taglist == null) {
 			Alert alert = new Alert(AlertType.ERROR);
@@ -173,6 +217,11 @@ public class SearchController implements LogoutController {
 		displayPhotos();
 	}
 	
+	/**
+	 * Allows the user to add a tag to a photo
+	 * @param event
+	 * @throws IOException
+	 */
 	public void addTag(ActionEvent event) throws IOException {
 		if(tfName.getText().trim().isEmpty() || tfValue.getText().trim().isEmpty()) {
 			Alert alert = new Alert(AlertType.ERROR);
@@ -194,6 +243,9 @@ public class SearchController implements LogoutController {
 		updateTagList();
 	}
 	
+	/**
+	 * Refreshes the listview for the taglist on add and remove tag options
+	 */
 	public void updateTagList() {
 		tagdisplay.clear();
 		for(Tag tag : taglist) {
@@ -207,6 +259,9 @@ public class SearchController implements LogoutController {
 
 	}
 	
+	/**
+	 * Displays the photos in the listview
+	 */
 	public void displayPhotos() {
 		obsPhoto = FXCollections.observableArrayList(photolist);
 		
@@ -226,6 +281,11 @@ public class SearchController implements LogoutController {
 		
 	}
 	
+	/**
+	 * 
+	 * Helper class that populates the Imageview based on the the results of the search results
+	 *
+	 */
 	private class Results extends ListCell<Photo>{
 		AnchorPane anchor = new AnchorPane();
 		StackPane stackpane = new StackPane();
@@ -269,6 +329,11 @@ public class SearchController implements LogoutController {
 		}
 	}
 	
+	/**
+	 * Creates an album for the current user from the search results
+	 * @param event
+	 * @throws IOException
+	 */
 	public void createAlbum(ActionEvent event) throws IOException{
 		if(photolist.isEmpty()){
 			 Alert alert = new Alert(AlertType.ERROR);
@@ -342,7 +407,12 @@ public class SearchController implements LogoutController {
 		   }
 		
 	}
-
+	
+	/**
+	 * Redirects the user to the previous page
+	 * @param event
+	 * @throws IOException
+	 */
 	public void back(ActionEvent event) throws IOException{
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/User.fxml"));
 		Parent sceneManager = (Parent) fxmlLoader.load();
@@ -354,6 +424,11 @@ public class SearchController implements LogoutController {
 		appStage.show();
 	}
 	
+	/**
+	 * Logs the user out
+	 * @param event
+	 * @throws IOException
+	 */
 	public void logOut(ActionEvent event) throws IOException{
 		logMeOut(event);
 		System.out.println("Logged out from: Search");

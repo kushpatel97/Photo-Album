@@ -30,6 +30,12 @@ import model.Photo;
 import model.Superuser;
 import model.User;
 
+/**
+ * 
+ * @author Kush Patel
+ * @author Alex Louie
+ *
+ */
 public class PhotoViewController implements LogoutController {
 	@FXML
 	public ListView<Photo> listview;
@@ -47,13 +53,41 @@ public class PhotoViewController implements LogoutController {
 	@FXML 
 	public Text tCaption, tDate;
 
+	/**
+	 * ArrayList that stores the instance of a photo
+	 */
 	public static ArrayList<Photo> photolist = new ArrayList<>();
-	public ObservableList<Photo> observableList;	
-	public static Superuser adminuser = Main.driver;
-	public static User user;
-	public static ArrayList<Album> albumlist; // for move/copy
-	public static Album album; // used to store current user
 	
+	/**
+	 * An observable list that helps display the list of photos
+	 */
+	public ObservableList<Photo> observableList;	
+	
+	/**
+	 * A Superuser instance that helps maintain the state of the program
+	 */
+	public static Superuser adminuser = Main.driver;
+	
+	/**
+	 * A User object that maintains current user
+	 */
+	public static User user;
+	
+	/**
+	 * An album list that helps with moving an copying albums
+	 */
+	public static ArrayList<Album> albumlist;
+	
+	/**
+	 * Used to store the albums of a user
+	 */
+	public static Album album; 
+	
+	/**
+	 * On scene start it refreshes the the list of photos in the photo listview as well as thumbnails
+	 * @param app_stage
+	 * Takes in the previous Stage to help keep track of current albums
+	 */
 	public void start(Stage app_stage) {
 		
 		app_stage.setTitle(adminuser.getCurrent().getCurrentAlbum().getAlbumName() + " Album Page");
@@ -80,7 +114,10 @@ public class PhotoViewController implements LogoutController {
 		});
 	}
 	
-	
+	/**
+	 * Moves a photo from one album to another album
+	 * @throws IOException
+	 */
 	public void move() throws IOException {
 		String moveAlbum = tfMove.getText().trim();
 		boolean inList = false;
@@ -130,6 +167,10 @@ public class PhotoViewController implements LogoutController {
 		System.out.println("move");
 	}
 	
+	/**
+	 * Copy's a photo into another album
+	 * @throws IOException
+	 */
 	public void copy() throws IOException {
 		String copyAlbum = tfCopy.getText().trim();
 		boolean inList = false;
@@ -176,12 +217,20 @@ public class PhotoViewController implements LogoutController {
 		System.out.println("move");
 	}
 	
-	
+	/**
+	 * Displays a small image of the current photo in the form of an image view
+	 */
 	public void displayThumbnail() {
 		Photo photo = listview.getSelectionModel().getSelectedItem();
 		File file;
 		if (photo != null) {
 			file = photo.getPic();
+//			if(adminuser.getCurrent().getUsername().equals("stock")) {
+//				String str = file.getAbsolutePath();
+//				int stkphoto = str.indexOf("stockphotos");
+//				String newfilepath = str.substring(stkphoto, str.length());
+//				Image image = new Image(newfilepath);
+//			}else {
 			Image image = new Image(file.toURI().toString());
 			displayArea.setImage(image);
 		} else {
@@ -190,6 +239,9 @@ public class PhotoViewController implements LogoutController {
 		return;
 	}
 	
+	/**
+	 * Allows the user to update the caption of a photo
+	 */
 	public void updateCaption() {
 		Photo photo = listview.getSelectionModel().getSelectedItem();
 		if (photolist.size() > 0 && photo != null) {
@@ -201,6 +253,10 @@ public class PhotoViewController implements LogoutController {
 		}
 	}
 	
+	/**
+	 * Adds a photo to the current album
+	 * @throws IOException
+	 */
 	public void addPhoto() throws IOException {
 		FileChooser filechooser = new FileChooser();
 		FileChooser.ExtensionFilter extFilterJPG = new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg", "*.gif");
@@ -236,6 +292,10 @@ public class PhotoViewController implements LogoutController {
 		
 	}
 	
+	/**
+	 * Deletes the photo from the current album
+	 * @throws IOException
+	 */
 	public void deletePhoto() throws IOException {
 
 		int index = listview.getSelectionModel().getSelectedIndex();
@@ -269,8 +329,9 @@ public class PhotoViewController implements LogoutController {
 		return;
 	}
 	
-	
-	
+	/**
+	 * Updates the listview of photo's on add or delete photo action
+	 */
 	public void update() {
 		photolist.clear();
 		for (int i = 0; i < album.getPhotos().size(); i++) {
@@ -282,7 +343,11 @@ public class PhotoViewController implements LogoutController {
 		listview.refresh();
 	}
 	
-	
+	/**
+	 * Redirects the user to a search page
+	 * @param event
+	 * @throws IOException
+	 */
 	public void search(ActionEvent event) throws IOException {
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/Search.fxml"));
 		Parent sceneManager = (Parent) fxmlLoader.load();
@@ -294,6 +359,13 @@ public class PhotoViewController implements LogoutController {
 		appStage.show();	
 	}
 	
+	/**
+	 * Enlarges the photo in a different view.
+	 * Also displays properties of a photo
+	 * Has the ability to add and remove tags as well as edit captions
+	 * @param event
+	 * @throws IOException
+	 */
 	public void display(ActionEvent event) throws IOException {
 		if (photolist.size() > 0) {
 			boolean checked = false;
@@ -324,6 +396,11 @@ public class PhotoViewController implements LogoutController {
 		
 	}
 	
+	/**
+	 * Displays an albums photos in a manual slideshow
+	 * @param event
+	 * @throws IOException
+	 */
 	public void slideshow(ActionEvent event) throws IOException {
 		if (photolist.size() == 0) {
 			Alert alert = new Alert(AlertType.ERROR);
@@ -351,7 +428,11 @@ public class PhotoViewController implements LogoutController {
 	}
 	
 	
-	
+	/**
+	 * Redirects the user to the previous page: the Album page
+	 * @param event
+	 * @throws IOException
+	 */
 	public void back(ActionEvent event) throws IOException {
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/User.fxml"));
 		Parent sceneManager = (Parent) fxmlLoader.load();
@@ -363,6 +444,11 @@ public class PhotoViewController implements LogoutController {
 		appStage.show();
 	}
 	
+	/**
+	 * Logs the user out and returns the user to the login page
+	 * @param event
+	 * @throws IOException
+	 */
 	public void logOut(ActionEvent event) throws IOException {
 		logMeOut(event);
 		System.out.println("Logged Out");
