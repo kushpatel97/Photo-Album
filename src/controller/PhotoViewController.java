@@ -227,7 +227,7 @@ public class PhotoViewController implements LogoutController {
 			
 			//Changes here ======================================================
 			file = photo.getPic();
-			if(adminuser.getCurrent().getUsername().equals("stock")) {
+			if(adminuser.getCurrent().getUsername().equals("stock") && photo.isStock) {
 				String str = file.getAbsolutePath();
 				int stkphoto = str.indexOf("stockphotos");
 				String newfilepath = str.substring(stkphoto, str.length());
@@ -287,6 +287,7 @@ public class PhotoViewController implements LogoutController {
 						index = filepath.indexOf("stockphotos");
 						String newfilepath = filepath.substring(index,filepath.length());
 						Photo newPhoto2 = new Photo(imgfile, newfilepath);
+						newPhoto2.isStock = true;
 						album.addPhoto(newPhoto2);
 					} else {
 						newPhoto = new Photo(imgfile, filepath);	

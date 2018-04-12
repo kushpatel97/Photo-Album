@@ -27,6 +27,7 @@ public class Photo implements Serializable {
 	public String filepath;
 	public Calendar cal;
 	public Date date;
+	public boolean isStock = false;
 	
 	
 	public Photo(File pic, String photoname) {
