@@ -27,6 +27,14 @@ import model.Album;
 import model.Superuser;
 import model.User;
 
+
+
+/** 
+ * User controller controls all the actions from opening/adding/deleting albums to searching 
+ * @author Alex Louie 
+ * @author Kush Patel 
+ * 
+ */
 public class UserController implements LogoutController{
 	@FXML
 	public ListView<Album> listview;
@@ -43,10 +51,24 @@ public class UserController implements LogoutController{
 	@FXML
 	public TextField tfName, tfNewAlbum; //user1 and user2
 	
+	/**
+	 * Current Username
+	 */
 	public static String username;
 	
+	/**
+	 * Stores instances of all albus
+	 */
 	public static ArrayList<Album> albumlist = new ArrayList<>();
+	
+	/**
+	 * Helps display the albumlist
+	 */
 	public ObservableList<Album> observableList;	
+	
+	/**
+	 * A Superuser instance that helps maintain the state of the program
+	 */
 	public static Superuser adminuser = Main.driver;
 	public static User user; // used to store current user
 	public static boolean stock;

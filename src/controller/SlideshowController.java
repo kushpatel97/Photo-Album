@@ -43,20 +43,27 @@ public class SlideshowController implements LogoutController {
 	
 	@FXML
 	public Text tStatus;
-
+	
+	/** 
+	 * Stores instances of photos going to be displayed 
+	 */ 
 	public static ArrayList<Photo> album = new ArrayList<>();
 	public static final int frontIndex = 0;
 	public static int backIndex;
 	public static int currentIndex;
 
 	
-	
-	
+	/** 
+	 * updates slideshow 
+	 */ 
 	public void start() {
 		update();
 		
 	}
 	
+	/**
+	 * Populates the imageview with the current image 
+	 */
 	public void update() {
 		currentIndex = 0;
 		backIndex = album.size()-1;
@@ -75,6 +82,9 @@ public class SlideshowController implements LogoutController {
 		
 	}
 	
+	/**
+	 *  On next the image view switches to the next photo 
+	 */
 	public void forward() {
 		if (currentIndex+1 > backIndex) {
 			return;
@@ -93,6 +103,9 @@ public class SlideshowController implements LogoutController {
 		}
 	}
 	
+	/**
+	 * On previous the imageview switches back to the previous photo 
+	 */
 	public void backward() {
 		if (currentIndex-1 < frontIndex) {
 			return;
@@ -111,6 +124,11 @@ public class SlideshowController implements LogoutController {
 		}
 	}
 	
+	/**
+	 * Redirects the user to the previous page: the PhotoView page
+	 * @param event
+	 * @throws IOException
+	 */
 	public void back(ActionEvent event) throws IOException {
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/PhotoView.fxml"));
 		Parent sceneManager = (Parent) fxmlLoader.load();
@@ -122,6 +140,9 @@ public class SlideshowController implements LogoutController {
 		appStage.show();
 	}
 	
+	/**
+	 * Logs the user out and returns the user to the login page
+	 */
 	public void logOut(ActionEvent event) throws IOException {
 		logMeOut(event);
 		System.out.println("Logged Out");
