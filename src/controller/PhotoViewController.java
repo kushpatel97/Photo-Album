@@ -263,8 +263,6 @@ public class PhotoViewController implements LogoutController {
 		filechooser.getExtensionFilters().add(extFilterJPG);
 		File imgfile = filechooser.showOpenDialog(null);
 		
-		
-		
 		if (imgfile == null) {
 			return;
 		} /*else if (album.exists(imgfile.getAbsolutePath())) {
@@ -276,6 +274,7 @@ public class PhotoViewController implements LogoutController {
 		}*/ else {
 			
 				String filepath = imgfile.getAbsolutePath();
+				//Photo newPhoto = new Photo(imgfile, "stockphotos/pic1.jpeg");
 				Photo newPhoto = new Photo(imgfile, filepath);
 				album.addPhoto(newPhoto);
 				update();
