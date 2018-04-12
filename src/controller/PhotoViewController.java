@@ -224,6 +224,8 @@ public class PhotoViewController implements LogoutController {
 		Photo photo = listview.getSelectionModel().getSelectedItem();
 		File file;
 		if (photo != null) {
+			
+			//Changes here ======================================================
 			file = photo.getPic();
 			if(adminuser.getCurrent().getUsername().equals("stock")) {
 				String str = file.getAbsolutePath();
@@ -275,10 +277,25 @@ public class PhotoViewController implements LogoutController {
 			alert.showAndWait();
 			return;
 		}*/ else {
+			
+			
 				String filepath = imgfile.getAbsolutePath();
-				//Photo newPhoto = new Photo(imgfile, "stockphotos/pic1.jpeg");
-				Photo newPhoto = new Photo(imgfile, filepath);
-				album.addPhoto(newPhoto);
+				Photo newPhoto;
+				if(adminuser.getCurrent().getUsername().equals("stock")) {
+					int index;
+					if (filepath.contains("stockphotos")) {
+						index = filepath.indexOf("stockphotos");
+						String newfilepath = filepath.substring(index,filepath.length());
+						Photo newPhoto2 = new Photo(imgfile, newfilepath);
+						album.addPhoto(newPhoto2);
+					} else {
+						newPhoto = new Photo(imgfile, filepath);	
+						album.addPhoto(newPhoto);
+					}
+				} else {
+					newPhoto = new Photo(imgfile, filepath);	
+					album.addPhoto(newPhoto);
+				}
 				update();
 			
 		}

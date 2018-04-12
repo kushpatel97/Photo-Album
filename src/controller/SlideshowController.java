@@ -25,6 +25,11 @@ import javafx.stage.Stage;
 import model.Photo;
 import model.Tag;
 
+/**
+ * 
+ * @author Mac
+ *
+ */
 public class SlideshowController implements LogoutController {
 
 	@FXML
