@@ -2,6 +2,14 @@ package model;
 
 import java.io.Serializable;
 
+
+/**
+ * 
+ * Tags for users
+ * @author Kush Patel
+ * @author Alex Louie
+ *
+ */
 public class Tag implements Serializable {
 	public String name;
 	public String value;
@@ -13,7 +21,9 @@ public class Tag implements Serializable {
 	
 	// more functions
 	
-	
+	/**
+	 * Compares  tag values
+	 */
 	@Override
 	public boolean equals(Object o) {
 		if(o == null || !( o instanceof Tag) ) {

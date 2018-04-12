@@ -10,53 +10,99 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.*;
 
+/**
+ * @author Kush Patel
+ * @author Alex Louie
+ *
+ */
 public class User implements Serializable{
 
-	/**
-	 * @author Alex Louie
-	 * @author Kush Patel
-	 */
+
 	private static final long serialVersionUID = 1L;
+	
+	/**
+	 * Current username
+	 */
 	public String username;
+	
+	/**
+	 * List of albums to users
+	 */
 	public ArrayList<Album> albums;
+	
+	/**
+	 * Current Album
+	 */
 	public Album currentAlbum;
 	
 	public static final String storeDir = "dat";
 	public static final String storeFile = "users.dat";
 
 
-	
+	/**
+	 * Constructor
+	 * @param username
+	 */
 	public User(String username) {
 		this.username = username;
 		albums = new ArrayList<Album>();
 	}
 	
+	/**
+	 * Prints a list of albums
+	 */
 	public void printAlbums() {
 		for (Album album: albums) {
 			System.out.println(album.albumName);
 		}
 	}
 	
+	/**
+	 * Adds an album to the user's album list
+	 * @param album
+	 */
 	public void addAlbum(Album album) {
 		albums.add(album);
 	}
 	
+	/**
+	 * deletes an album
+	 * @param index
+	 */
 	public void deleteAlbum(int index) {
 		albums.remove(index);
 	}
 	
+	/**
+	 *   
+	 * @return Username
+	 */
 	public String getUsername() {
 		return username;
 	}
 
+	/**
+	 * Sets username
+	 * @param username
+	 */
 	public void setUsername(String username) {
 		this.username = username;
 	}
-
+	
+	/**
+	 *   
+	 * @return gets a list of albums
+	 */
 	public ArrayList<Album> getAlbums() {
 		return albums;
 	}
 	
+	
+	/**
+	 * Check if album exists
+	 * @param albumname name of album
+	 * @return ture, exists
+	 */
 	public boolean exists(Album albumname) {
 		for(Album album : albums) {
 			if (album.getName().equals(albumname.albumName)) {
@@ -66,22 +112,44 @@ public class User implements Serializable{
 		return false;
 	}
 
+	/**
+	 * Set album
+	 * @param albums
+	 */
 	public void setAlbums(ArrayList<Album> albums) {
 		this.albums = albums;
 	}
 
+	/**
+	 *    
+	 * @return current album
+	 */
 	public Album getCurrentAlbum() {
 		return currentAlbum;
 	}
 	
+	/**
+	 * get album
+	 * @param index
+	 * @return get album
+	 */
 	public Album getAlbum(int index) {
 		return albums.get(index);
 	}
-
+	
+	/**
+	 * set current album
+	 * @param currentAlbum
+	 */
 	public void setCurrentAlbum(Album currentAlbum) {
 		this.currentAlbum = currentAlbum;
 	}
 	
+	/**
+	 * helper of search by or method
+	 * @param taggedlist
+	 * @return or search
+	 */
 	public ArrayList<Photo> getOrTaggedPhotos(ArrayList<Tag> taggedlist){
 		ArrayList<Photo> photolist = new ArrayList<Photo>();
 		//Used to make sure no duplicates
@@ -100,7 +168,11 @@ public class User implements Serializable{
 		return photolist;
 	}
 	
-	
+	/**
+	 * helper for search by and
+	 * @param taggedlist
+	 * @return
+	 */
 	public ArrayList<Photo> getAndTaggedPhotos(ArrayList<Tag> taggedlist){
 		System.out.println("Gettin And Photos");
 		ArrayList<Photo> photolist = new ArrayList<Photo>();
@@ -160,13 +232,24 @@ public class User implements Serializable{
 		}
 		return inrange;
 	}
-
+	
+	/**
+	 * Saves .dat file
+	 * @param pdApp
+	 * @throws IOException
+	 */
 	public static void save(User pdApp) throws IOException {
 		ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(storeDir + File.separator + storeFile));
 		oos.writeObject(pdApp);
 		oos.close();
 	}
-
+	
+	/**
+	 * Loads .dat file
+	 * @return userlist
+	 * @throws IOException
+	 * @throws ClassNotFoundException
+	 */
 	public static User load() throws IOException, ClassNotFoundException {
 		ObjectInputStream ois = new ObjectInputStream(new FileInputStream(storeDir + File.separator + storeFile));
 		User userList = (User) ois.readObject();

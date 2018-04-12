@@ -57,7 +57,7 @@ public class UserController implements LogoutController{
 	public static String username;
 	
 	/**
-	 * Stores instances of all albus
+	 * Stores instances of all albumss
 	 */
 	public static ArrayList<Album> albumlist = new ArrayList<>();
 	
@@ -70,9 +70,21 @@ public class UserController implements LogoutController{
 	 * A Superuser instance that helps maintain the state of the program
 	 */
 	public static Superuser adminuser = Main.driver;
-	public static User user; // used to store current user
+	
+	/**
+	 * Stores current user
+	 */
+	public static User user;
+	
+	/**
+	 * Current stock photo
+	 */
 	public static boolean stock;
 	
+	/**
+	 * When the scene loads the page updates the album listview
+	 * @param app_stage
+	 */
 	public void start(Stage app_stage) {
 		update();
 		
@@ -90,6 +102,10 @@ public class UserController implements LogoutController{
 		listview.getSelectionModel().selectedItemProperty().addListener( (v, oldValue, newValue) -> updateContent(newValue) );
 	}
 	
+	/**
+	 * Sorts alphabetically, A-first to Z-last
+	 * @throws IOException
+	 */
 	public void sortByAZ() throws IOException {
 		Collections.sort(albumlist, Album.sortByAZ);
 		observableList = FXCollections.observableArrayList(albumlist);
@@ -98,6 +114,10 @@ public class UserController implements LogoutController{
 		User.save(user);
 	}
 	
+	/**
+	 * Sorts alphabetically, Z-first to A-last
+	 * @throws IOException
+	 */
 	public void sortByZA() throws IOException {
 		Collections.sort(albumlist, Album.sortByZA);
 		observableList = FXCollections.observableArrayList(albumlist);
@@ -106,6 +126,10 @@ public class UserController implements LogoutController{
 		User.save(user);
 	}
 	
+	/**
+	 * Sorts by album size, increasing
+	 * @throws IOException
+	 */
 	public void sortByIP() throws IOException {
 		Collections.sort(albumlist, Album.sortByIP);
 		observableList = FXCollections.observableArrayList(albumlist);
@@ -114,6 +138,10 @@ public class UserController implements LogoutController{
 		User.save(user);
 	}
 	
+	/**
+	 * Sorts by album size, decreasing
+	 * @throws IOException
+	 */
 	public void sortByDP() throws IOException {
 		Collections.sort(albumlist, Album.sortByDP);
 		observableList = FXCollections.observableArrayList(albumlist);
@@ -122,6 +150,10 @@ public class UserController implements LogoutController{
 		User.save(user);
 	}
 	
+	/**
+	 * Sort by oldest to newest date
+	 * @throws IOException
+	 */
 	public void sortByID() throws IOException {
 		Collections.sort(albumlist, Album.sortByID);
 		observableList = FXCollections.observableArrayList(albumlist);
@@ -130,6 +162,10 @@ public class UserController implements LogoutController{
 		User.save(user);
 	}
 	
+	/**
+	 * Sort by newest to oldest date
+	 * @throws IOException
+	 */
 	public void sortByDD() throws IOException {
 		Collections.sort(albumlist, Album.sortByDD);
 		observableList = FXCollections.observableArrayList(albumlist);
@@ -138,7 +174,10 @@ public class UserController implements LogoutController{
 		User.save(user);
 	}
 	
-	// updates with listener
+	/**
+	 * Updates the values of the Album properties
+	 * @param newValue The new album value
+	 */
 	private void updateContent(Album newValue) {
 		if (newValue != null) {
 			tfName.setText(newValue.albumName);	
@@ -147,6 +186,9 @@ public class UserController implements LogoutController{
 		}
 	}
 	
+	/**
+	 * Updates properties of the album
+	 */
 	public void updateContentBack() {
 		if (albumlist.size() > 0) {
 			Album alb = listview.getSelectionModel().getSelectedItem();
@@ -155,6 +197,10 @@ public class UserController implements LogoutController{
 		}
 	}
 	
+	/**
+	 * Add album to as user's album list
+	 * @throws IOException
+	 */
 	public void addAlbum() throws IOException {
 		String albumname = tfNewAlbum.getText().trim();
 		Album album = new Album(albumname);
@@ -179,6 +225,10 @@ public class UserController implements LogoutController{
 		User.save(user);	
 	}
 	
+	/**
+	 * Renames an album
+	 * @throws IOException
+	 */
 	public void renameAlbum() throws IOException {
 		String newName = tfName.getText().trim();
 
@@ -223,6 +273,11 @@ public class UserController implements LogoutController{
 		return;
 	}
 	
+	/**
+	 * Opens an album and sends it to the photoview scene
+	 * @param event
+	 * @throws IOException
+	 */
 	public void openAlbum(ActionEvent event) throws IOException {
 		PhotoViewController.user = user;
 		PhotoViewController.album = listview.getSelectionModel().getSelectedItem();
@@ -254,6 +309,10 @@ public class UserController implements LogoutController{
 		appStage.show();
 	}
 	
+	/**
+	 * Deletes an album from the user list
+	 * @throws IOException
+	 */
 	public void deleteAlbum() throws IOException {
 		int index = listview.getSelectionModel().getSelectedIndex();
 		Alert alert = new Alert(AlertType.CONFIRMATION);
@@ -285,7 +344,11 @@ public class UserController implements LogoutController{
 		return;
 	}
 	
-	
+	/**
+	 * Redirects the user to the search page
+	 * @param event
+	 * @throws IOException
+	 */
 	public void search(ActionEvent event) throws IOException {
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/Search.fxml"));
 		Parent sceneManager = (Parent) fxmlLoader.load();
@@ -298,11 +361,19 @@ public class UserController implements LogoutController{
 		
 	}
 	
+	/**
+	 * Logs the current user out
+	 * @param event
+	 * @throws IOException
+	 */
 	public void logOut(ActionEvent event) throws IOException {
 		logMeOut(event);
 		//System.out.println("Logged Out");
 	}
 	
+	/**
+	 * Updates the albums contents
+	 */
 	public void update() {
 		tUser.setText(username + "'s Album List:");
 		// tfName.setText(listview.getSelectionModel().getSelectedItem());
