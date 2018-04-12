@@ -225,14 +225,17 @@ public class PhotoViewController implements LogoutController {
 		File file;
 		if (photo != null) {
 			file = photo.getPic();
-//			if(adminuser.getCurrent().getUsername().equals("stock")) {
-//				String str = file.getAbsolutePath();
-//				int stkphoto = str.indexOf("stockphotos");
-//				String newfilepath = str.substring(stkphoto, str.length());
-//				Image image = new Image(newfilepath);
-//			}else {
-			Image image = new Image(file.toURI().toString());
-			displayArea.setImage(image);
+			if(adminuser.getCurrent().getUsername().equals("stock")) {
+				String str = file.getAbsolutePath();
+				int stkphoto = str.indexOf("stockphotos");
+				String newfilepath = str.substring(stkphoto, str.length());
+				File img = new File(newfilepath);
+				Image image = new Image(img.toURI().toString());
+				displayArea.setImage(image);
+			}else {
+				Image image = new Image(file.toURI().toString());
+				displayArea.setImage(image);
+			}	 
 		} else {
 			displayArea.setImage(null);
 		}
@@ -272,7 +275,6 @@ public class PhotoViewController implements LogoutController {
 			alert.showAndWait();
 			return;
 		}*/ else {
-			
 				String filepath = imgfile.getAbsolutePath();
 				//Photo newPhoto = new Photo(imgfile, "stockphotos/pic1.jpeg");
 				Photo newPhoto = new Photo(imgfile, filepath);
